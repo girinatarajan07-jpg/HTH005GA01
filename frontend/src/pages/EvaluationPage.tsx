@@ -17,6 +17,7 @@ import { LoadingState } from '../components/common/LoadingState';
 import { ErrorState } from '../components/common/ErrorState';
 import { FindingBadge } from '../components/badges/FindingBadge';
 import { RiskBadge } from '../components/badges/RiskBadge';
+import type { ClauseEvalComparison } from '../types';
 
 export const EvaluationPage: React.FC = () => {
   const [filterType, setFilterType] = useState<'ALL' | 'CONFLICT' | 'NOT_FOUND' | 'COMPLIANT'>('ALL');
@@ -39,7 +40,7 @@ export const EvaluationPage: React.FC = () => {
   const matrix = evalData?.confusion_matrix;
   const clauses = evalData?.clauses || [];
 
-  const filteredClauses = clauses.filter((c) => {
+  const filteredClauses = clauses.filter((c: ClauseEvalComparison) => {
     if (filterType === 'CONFLICT' && !c.is_conflict) return false;
     if (filterType === 'NOT_FOUND' && c.ground_truth_classification !== 'NOT_FOUND') return false;
     if (filterType === 'COMPLIANT' && c.ground_truth_classification !== 'NO_CONFLICT') return false;
@@ -132,10 +133,10 @@ export const EvaluationPage: React.FC = () => {
                 </p>
               </div>
 
-              {/* Card 2: Hallucination Rate */}
+              {/* Card 2: Unverified Citation Rate */}
               <div className="rounded-md border border-slate-200 bg-white p-4 shadow-sm">
                 <div className="flex items-center justify-between text-xs text-slate-500 font-semibold">
-                  <span>Hallucination Rate</span>
+                  <span>Unverified Citation Rate</span>
                   <ShieldCheck size={16} className="text-emerald-600" />
                 </div>
                 <div className="mt-2 flex items-baseline gap-1.5">
@@ -147,7 +148,7 @@ export const EvaluationPage: React.FC = () => {
                   </span>
                 </div>
                 <p className="mt-1.5 text-[11px] text-slate-600 leading-snug">
-                  0 fabricated or ungrounded citations across entire benchmark.
+                  0% unverified citations across our 15-clause benchmark.
                 </p>
               </div>
 
@@ -204,7 +205,7 @@ export const EvaluationPage: React.FC = () => {
                   </span>
                 </div>
                 <p className="mt-1.5 text-[11px] text-slate-600 leading-snug">
-                  100% accurate identification of silent policy domains.
+                  Reliable identification of silent policy domains in our benchmark.
                 </p>
               </div>
             </div>
@@ -263,7 +264,7 @@ export const EvaluationPage: React.FC = () => {
                         </td>
                         <td className="p-4 border border-slate-200 bg-slate-50 font-mono text-base font-bold text-slate-500">
                           <div>FP: {matrix?.false_positives}</div>
-                          <div className="text-[10px] text-slate-500 font-normal">False Positives (Hallucinations)</div>
+                          <div className="text-[10px] text-slate-500 font-normal">False Positives (Unverified Claims)</div>
                         </td>
                         <td className="p-4 border border-slate-200 bg-emerald-50/70 font-mono text-base font-bold text-emerald-900">
                           <div>TN: {matrix?.true_negatives}</div>
@@ -375,7 +376,7 @@ export const EvaluationPage: React.FC = () => {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-200">
-                    {filteredClauses.map((c) => (
+                    {filteredClauses.map((c: ClauseEvalComparison) => (
                       <tr key={c.clause_number} className="hover:bg-slate-50/70 transition-colors">
                         <td className="p-3 font-mono font-bold text-slate-800 whitespace-nowrap">
                           {c.clause_number}
@@ -384,13 +385,13 @@ export const EvaluationPage: React.FC = () => {
                           {c.title}
                         </td>
                         <td className="p-3 whitespace-nowrap">
-                          <FindingBadge classification={c.ground_truth_classification} size="sm" />
+                          <FindingBadge classification={c.ground_truth_classification as any} size="sm" />
                         </td>
                         <td className="p-3 whitespace-nowrap">
-                          <FindingBadge classification={c.predicted_classification} size="sm" />
+                          <FindingBadge classification={c.predicted_classification as any} size="sm" />
                         </td>
                         <td className="p-3 whitespace-nowrap">
-                          <RiskBadge level={c.predicted_risk} size="sm" />
+                          <RiskBadge level={c.predicted_risk as any} size="sm" />
                         </td>
                         <td className="p-3">
                           {c.evidence_count > 0 ? (

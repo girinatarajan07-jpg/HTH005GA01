@@ -4,6 +4,12 @@ Implements F4 from PRD:
 "Run BM25 and embeddings/vectorizer, then rerank, and retrieve the top-k policy chunks per clause."
 """
 
+import os
+os.environ["OPENBLAS_NUM_THREADS"] = "1"
+os.environ["MKL_NUM_THREADS"] = "1"
+os.environ["OMP_NUM_THREADS"] = "1"
+os.environ["NUMEXPR_NUM_THREADS"] = "1"
+
 import re
 from typing import List, Tuple, Dict
 import numpy as np
@@ -37,9 +43,10 @@ class PolicyRetriever:
         tokenized_corpus = [tokenize_text(doc) for doc in corpus]
         self.bm25 = BM25Okapi(tokenized_corpus)
 
-        # 2. Dense/Sublinear TF-IDF n-gram (1-3) Vectorizer
+        # 2. Dense/Sublinear TF-IDF n-gram (1-2) Vectorizer with bounded features
         self.vectorizer = TfidfVectorizer(
-            ngram_range=(1, 3),
+            ngram_range=(1, 2),
+            max_features=2500,
             sublinear_tf=True,
             stop_words="english",
             token_pattern=r"(?u)\b\w+\b"

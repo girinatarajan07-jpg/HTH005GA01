@@ -233,11 +233,13 @@ def generate_all_samples():
              "Provider shall furnish enterprise cloud infrastructure and tier-1 uptime support under standard service level commitments as set forth in Exhibit A."),
             ("Clause 2: Security Breach Notification Period",
              "Provider shall inform subscriber of verified data loss events within seventy-two (72) hours of technical verification by provider operations team."),
-            ("Clause 3: Annual Independent Audit Validation",
-             "Provider shall deliver an annual SOC 2 Type II compliance audit report prepared by an accredited CPA firm upon forty-five days written advance notice."),
+            ("Clause 3: Independent Third-Party Certifications",
+             "Provider shall maintain annual SOC 2 Type II compliance reports prepared by an accredited CPA firm upon written request."),
             ("Clause 4: Aggregate Liability Cap and Data Protection Exclusions",
              "Total aggregate liability under this agreement shall not exceed twelve (12) months of service fees paid, except that claims relating to confidentiality breaches or intentional misconduct shall not be subject to this limitation."),
-            ("Clause 5: Termination and Post-Contract Data Sanitization",
+            ("Clause 5: Customer Audit and Inspection Rights",
+             "Subscriber or its designated auditor may perform an annual virtual or on-site security inspection of provider data centers upon thirty (30) business days advance written notice."),
+            ("Clause 6: Termination and Post-Contract Data Sanitization",
              "Within sixty (60) days following termination, provider shall purge subscriber files from production storage environments and provide confirmation thereof.")
         ]
     )

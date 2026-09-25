@@ -3,6 +3,13 @@ Configuration module for Grounded Compliance Assistant Backend.
 """
 
 import os
+
+# Limit OpenBLAS, MKL, and OMP thread allocations to prevent out-of-memory errors
+os.environ["OPENBLAS_NUM_THREADS"] = "1"
+os.environ["MKL_NUM_THREADS"] = "1"
+os.environ["OMP_NUM_THREADS"] = "1"
+os.environ["NUMEXPR_NUM_THREADS"] = "1"
+
 from pathlib import Path
 
 # Base Paths

@@ -50,7 +50,7 @@ export const ClauseListItem: React.FC<ClauseListItemProps> = ({
       </p>
 
       <div className="mt-2.5 flex flex-wrap items-center gap-1.5">
-        <FindingBadge classification={clause.classification} size="sm" />
+        <FindingBadge classification={clause.classification} outcome={clause.outcome} size="sm" />
         <RiskBadge level={clause.risk_level} size="sm" />
       </div>
     </button>

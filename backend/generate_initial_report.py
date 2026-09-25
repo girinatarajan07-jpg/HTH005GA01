@@ -4,29 +4,24 @@ Generates an initial demonstration compliance audit report from the sample polic
 
 import asyncio
 from pathlib import Path
-from app.services.pipeline import (
-    seed_sample_documents_if_empty,
-    run_compliance_pipeline,
-    active_jobs,
-    uploaded_policies,
-    uploaded_contract,
-    INITIAL_STEPS,
-)
+import app.services.pipeline as pl
 from app.models.schemas import AnalysisJob, AnalysisStatus
 
 
 async def main():
-    seed_sample_documents_if_empty()
+    pl.seed_sample_documents_if_empty()
     job_id = "job-initial-demo"
     job = AnalysisJob(
         job_id=job_id,
         status=AnalysisStatus.QUEUED,
-        steps=[s.model_copy() for s in INITIAL_STEPS],
+        steps=[s.model_copy() for s in pl.INITIAL_STEPS],
     )
-    active_jobs[job_id] = job
+    pl.active_jobs[job_id] = job
     print("Running compliance pipeline on sample documents...")
-    await run_compliance_pipeline(job_id, uploaded_policies, uploaded_contract)
+    await pl.run_compliance_pipeline(job_id, pl.uploaded_policies, pl.uploaded_contract)
     print(f"Pipeline completed with status: {job.status}")
+    if job.error_message:
+        print(f"Error message: {job.error_message}")
     print(f"Generated Report ID: {job.report_id}")
 
 

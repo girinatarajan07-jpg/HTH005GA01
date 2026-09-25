@@ -19,7 +19,8 @@ import { FilterBar, type FilterState } from '../components/report/FilterBar';
 import { ClauseList } from '../components/report/ClauseList';
 import { ClauseDetail } from '../components/report/ClauseDetail';
 import { SourceDockViewer } from '../components/report/SourceDockViewer';
-import { RiskHeatmap } from '../components/report/RiskHeatmap';
+import { RiskHeatmap, type HeatmapFilterCategory } from '../components/report/RiskHeatmap';
+import { ExecutiveSummaryBanner } from '../components/report/ExecutiveSummaryBanner';
 import { LoadingState } from '../components/common/LoadingState';
 import { ErrorState } from '../components/common/ErrorState';
 import { getStoredDecisions, saveStoredDecision } from '../utils/storage';
@@ -38,6 +39,9 @@ export const ReportPage: React.FC = () => {
 
   // Active Source Evidence for the Right-hand PDF / Document viewer
   const [activeEvidence, setActiveEvidence] = useState<PolicyEvidence | null>(null);
+
+  // Heatmap interactive category filter (Priority 9)
+  const [heatmapFilter, setHeatmapFilter] = useState<HeatmapFilterCategory>(null);
 
   // Export state
   const [isExporting, setIsExporting] = useState(false);
@@ -115,6 +119,35 @@ export const ReportPage: React.FC = () => {
       list = list.filter((c) => c.risk_level === currentFilters.risk);
     }
 
+    // Heatmap interactive category filter (Priority 9)
+    if (heatmapFilter) {
+      if (
+        heatmapFilter === 'CRITICAL' ||
+        heatmapFilter === 'HIGH' ||
+        heatmapFilter === 'MEDIUM' ||
+        heatmapFilter === 'LOW'
+      ) {
+        list = list.filter((c) => c.risk_level === heatmapFilter);
+      } else if (heatmapFilter === 'CONFLICT') {
+        list = list.filter(
+          (c) =>
+            c.outcome === 'CONFLICT' ||
+            c.classification === 'EXPLICIT_CONFLICT' ||
+            c.classification === 'INFERRED'
+        );
+      } else if (heatmapFilter === 'COMPLIANT') {
+        list = list.filter(
+          (c) => c.outcome === 'COMPLIANT' || c.classification === 'NO_CONFLICT'
+        );
+      } else if (heatmapFilter === 'POLICY_SILENT') {
+        list = list.filter(
+          (c) => c.outcome === 'POLICY_SILENT' || c.classification === 'NOT_FOUND'
+        );
+      } else if (heatmapFilter === 'NEEDS_REVIEW') {
+        list = list.filter((c) => c.outcome === 'NEEDS_REVIEW');
+      }
+    }
+
     // Sorting
     list.sort((a, b) => {
       if (currentFilters.sort === 'risk') {
@@ -142,7 +175,7 @@ export const ReportPage: React.FC = () => {
     });
 
     return list;
-  }, [report?.clauses, currentFilters]);
+  }, [report?.clauses, currentFilters, heatmapFilter]);
 
   // Ensure an active selected clause exists
   const activeClause = useMemo(() => {
@@ -181,6 +214,7 @@ export const ReportPage: React.FC = () => {
   };
 
   const handleResetFilters = () => {
+    setHeatmapFilter(null);
     const params = new URLSearchParams(searchParams);
     params.delete('q');
     params.delete('finding');
@@ -193,6 +227,18 @@ export const ReportPage: React.FC = () => {
     const params = new URLSearchParams(searchParams);
     params.set('clause', clauseId);
     setSearchParams(params, { replace: true });
+  };
+
+  const handleSelectClauseByNumber = (clauseNum: string) => {
+    if (!report?.clauses) return;
+    const found = report.clauses.find(
+      (c) =>
+        c.clause_number.toLowerCase() === clauseNum.toLowerCase() ||
+        c.clause_id === clauseNum
+    );
+    if (found) {
+      handleSelectClause(found.clause_id);
+    }
   };
 
   const handleCardFilter = (type: 'conflicts' | 'inferred' | 'no_conflict' | 'not_found') => {
@@ -296,11 +342,11 @@ export const ReportPage: React.FC = () => {
           <span className="text-slate-500">•</span>
           <span className="inline-flex items-center gap-1 text-emerald-400 font-medium">
             <CheckCircle2 size={13} />
-            <span>{stats.verifiedCitations}/{stats.totalCitations} citations verified (100% verbatim substring)</span>
+            <span>{stats.verifiedCitations}/{stats.totalCitations} citations verified (exact verbatim match)</span>
           </span>
           <span className="text-slate-500">•</span>
           <span className="text-slate-300 font-mono">
-            {stats.unverifiedCount} unsupported claims
+            {stats.unverifiedCount} unverified citations
           </span>
         </div>
 
@@ -430,6 +476,13 @@ export const ReportPage: React.FC = () => {
 
         {report && (
           <>
+            {/* Executive Summary Banner (Priority 8) */}
+            <ExecutiveSummaryBanner
+              summary={report.executive_summary}
+              clauses={report.clauses}
+              onSelectClause={handleSelectClauseByNumber}
+            />
+
             {/* 4 Summary Classification Cards */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 print-avoid-break">
               <SummaryCard
@@ -476,6 +529,8 @@ export const ReportPage: React.FC = () => {
                   clauses={report.clauses}
                   selectedClauseId={activeClause?.clause_id || null}
                   onSelectClause={handleSelectClause}
+                  activeFilter={heatmapFilter}
+                  onFilterChange={setHeatmapFilter}
                 />
 
                 <div className="flex items-center justify-between text-xs font-semibold text-slate-700 px-1 pt-1">

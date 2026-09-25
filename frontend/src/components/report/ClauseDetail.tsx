@@ -12,6 +12,7 @@ import { RiskBadge } from '../badges/RiskBadge';
 import { CitationStatus } from '../badges/CitationStatus';
 import { RedlineDiff } from './RedlineDiff';
 import { EvidenceCard } from './EvidenceCard';
+import { EvidenceChainPanel } from './EvidenceChainPanel';
 import type {
   ClauseFinding,
   PolicyEvidence,
@@ -121,7 +122,7 @@ export const ClauseDetail: React.FC<ClauseDetailProps> = ({
               <span className="text-xs text-slate-500 font-medium">Compliance Evaluation</span>
             </div>
             <div className="mt-2 flex flex-wrap items-center gap-2">
-              <FindingBadge classification={clause.classification} />
+              <FindingBadge classification={clause.classification} outcome={clause.outcome} />
               <RiskBadge level={clause.risk_level} />
             </div>
           </div>
@@ -237,13 +238,18 @@ export const ClauseDetail: React.FC<ClauseDetailProps> = ({
               </p>
               <div className="pt-1">
                 <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-slate-700 bg-slate-200 px-2 py-0.5 rounded">
-                  Grounding note: Zero fabricated claims.
+                  Grounding note: Policy is silent on this subject; every finding is linked to inspectable evidence.
                 </span>
               </div>
             </div>
           )}
         </div>
       </div>
+
+      {/* 6-Stage Compliance Evidence Chain Panel (Priority 5) */}
+      {clause.evidence_chain && (
+        <EvidenceChainPanel chain={clause.evidence_chain} clause={clause} />
+      )}
 
       {/* Suggested Revision (Redline Diff View - PRD F9) */}
       {clause.suggested_redline && (
@@ -262,7 +268,7 @@ export const ClauseDetail: React.FC<ClauseDetailProps> = ({
             Policy Citations ({clause.evidence.length})
           </h4>
           <span className="text-[11px] text-slate-500">
-            100% verified verbatim against policy repository
+            Verbatim substring verification against policy repository
           </span>
         </div>
 

@@ -8,12 +8,12 @@ from datetime import datetime, timezone
 from pathlib import Path
 import uuid
 import pypdf
-from fastapi import APIRouter, UploadFile, File, HTTPException, status
+from fastapi import APIRouter, UploadFile, File, HTTPException, status, Response
 from fastapi.responses import FileResponse
 
 from app.models.schemas import PolicyDocument, ContractDocument, DocumentsResponse
 import app.services.pipeline as pl
-from app.services.pdf_parser import parse_pdf
+from app.services.pdf_parser import parse_pdf, render_page_as_image_bytes
 from app import config
 
 router = APIRouter(prefix="/documents", tags=["Documents"])
@@ -21,6 +21,16 @@ router = APIRouter(prefix="/documents", tags=["Documents"])
 
 def find_document_file_path(doc_id: str) -> Optional[Path]:
     """Helper to locate physical file on disk by doc_id."""
+    pl.seed_sample_documents_if_empty()
+
+    # Direct filename check in sample dirs
+    for p in (config.SAMPLE_DATA_DIR / "policies").glob("*.pdf"):
+        if p.name == doc_id:
+            return p
+    for p in (config.SAMPLE_DATA_DIR / "contracts").glob("*.pdf"):
+        if p.name == doc_id:
+            return p
+
     # Check upload directory
     for f in config.UPLOAD_DIR.glob(f"{doc_id}_*"):
         if f.is_file():
@@ -210,6 +220,29 @@ async def get_page_content(doc_id: str, page_num: int):
             )
 
     return target.to_dict()
+
+
+@router.get("/page-image/{doc_id}/{page_num}")
+async def get_page_image(doc_id: str, page_num: int):
+    """
+    Renders and serves high-resolution PNG image of the specified page.
+    Used for visual bounding box highlight overlay in the Source Dock Viewer.
+    """
+    fpath = find_document_file_path(doc_id)
+    if not fpath or not fpath.exists():
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Document file for '{doc_id}' not found."
+        )
+
+    img_bytes = render_page_as_image_bytes(fpath, page_num)
+    if not img_bytes:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Could not render image for page {page_num} of document '{doc_id}'."
+        )
+
+    return Response(content=img_bytes, media_type="image/png")
 
 
 @router.delete("/{doc_id}", status_code=status.HTTP_204_NO_CONTENT)

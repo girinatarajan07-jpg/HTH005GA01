@@ -1,18 +1,25 @@
 """
 Evaluation and Benchmark Engine.
 Computes live compliance evaluation metrics against seeded ground truth answer key:
-- Citation Accuracy (Target: 100%)
-- Hallucination Rate (Target: 0%)
+- Citation Accuracy (Target: 100% on benchmark)
+- Hallucination Rate (Target: 0% on benchmark)
 - Conflict Recall (Target: >85%)
 - Conflict Precision (Target: >85%)
-- 'Not Found' Correctness (Target: >90%)
-- Confusion Matrix (TP, FP, TN, FN)
+- 'Not Found' (Policy Silent) Correctness (Target: >90%)
+- 2x2 Confusion Matrix (TP, FP, TN, FN)
 """
 
 import json
 from pathlib import Path
 from typing import Dict, Any, List, Optional
-from app.models.schemas import ComplianceReport, Classification, Confidence, RiskLevel
+from app.models.schemas import (
+    ComplianceReport,
+    Classification,
+    ComplianceOutcome,
+    Confidence,
+    RiskLevel,
+    VerificationStatus,
+)
 from app import config
 
 ANSWER_KEY_PATH = config.SAMPLE_DATA_DIR / "eval_answer_key.json"
@@ -75,6 +82,11 @@ def run_evaluation(report: Optional[ComplianceReport] = None) -> Dict[str, Any]:
         pred_cls = pred.classification.value if pred else "NOT_FOUND"
         pred_conf = pred.confidence.value if pred else "NOT_FOUND"
         pred_risk = pred.risk_level.value if pred else "LOW"
+        pred_outcome = pred.outcome.value if (pred and pred.outcome) else (
+            "CONFLICT" if pred_cls in ["EXPLICIT_CONFLICT", "INFERRED"] else (
+                "POLICY_SILENT" if pred_cls == "NOT_FOUND" else "COMPLIANT"
+            )
+        )
         is_pred_conflict = pred_cls in ["EXPLICIT_CONFLICT", "INFERRED"]
 
         # Confusion Matrix
@@ -87,8 +99,8 @@ def run_evaluation(report: Optional[ComplianceReport] = None) -> Dict[str, Any]:
         elif is_gt_conflict and not is_pred_conflict:
             fn += 1
 
-        # Not Found correctness
-        if is_gt_not_found and pred_cls == "NOT_FOUND":
+        # Not Found / Policy Silent correctness
+        if is_gt_not_found and (pred_cls == "NOT_FOUND" or pred_outcome == "POLICY_SILENT"):
             not_found_correct_count += 1
 
         # Citation verification metrics
@@ -97,13 +109,26 @@ def run_evaluation(report: Optional[ComplianceReport] = None) -> Dict[str, Any]:
         if pred and pred.evidence:
             for ev in pred.evidence:
                 total_citations += 1
-                if ev.citation and ev.citation.verified is True:
+                is_ver = (ev.citation and (ev.citation.verified is True or ev.citation.status == VerificationStatus.VERIFIED))
+                if is_ver:
                     verified_citations += 1
-                    cited_snippets.append({"text": ev.text[:120], "verified": True, "page": ev.page, "doc": ev.document})
+                    cited_snippets.append({
+                        "text": ev.text[:120],
+                        "verified": True,
+                        "status": "VERIFIED",
+                        "page": ev.page,
+                        "doc": ev.document
+                    })
                 else:
                     unverified_citations += 1
                     clause_cites_verified = False
-                    cited_snippets.append({"text": ev.text[:120], "verified": False, "page": ev.page, "doc": ev.document})
+                    cited_snippets.append({
+                        "text": ev.text[:120],
+                        "verified": False,
+                        "status": ev.citation.status.value if (ev.citation and ev.citation.status) else "FAILED",
+                        "page": ev.page,
+                        "doc": ev.document
+                    })
 
         is_exact_match = (gt_cls == pred_cls)
         
@@ -112,6 +137,7 @@ def run_evaluation(report: Optional[ComplianceReport] = None) -> Dict[str, Any]:
             "title": gt["title"],
             "ground_truth_classification": gt_cls,
             "predicted_classification": pred_cls,
+            "outcome": pred_outcome,
             "ground_truth_confidence": gt.get("ground_truth_confidence", "EXPLICITLY_STATED"),
             "predicted_confidence": pred_conf,
             "ground_truth_risk": gt.get("risk_level", "LOW"),

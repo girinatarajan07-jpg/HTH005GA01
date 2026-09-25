@@ -35,7 +35,7 @@ export const AnalysisPipeline: React.FC = () => {
         ))}
       </div>
       <p className="mt-3 text-[11px] text-slate-500 leading-relaxed">
-        Every clause is analyzed strictly against your uploaded internal policies. Every finding is verified against verbatim policy passages to eliminate hallucinations.
+        Every clause is analyzed strictly against your uploaded internal policies. Every finding is verified against verbatim policy passages to ensure inspectable evidence without unverified citations.
       </p>
     </div>
   );

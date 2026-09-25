@@ -1,9 +1,11 @@
 """
 Pydantic Schemas for Grounded Compliance Assistant API.
-Matches frontend TypeScript interfaces strictly.
+Matches frontend TypeScript interfaces strictly while providing deterministic
+anti-hallucination verification statuses, structured obligation comparisons,
+evidence chains, and executive summaries.
 """
 
-from typing import List, Optional
+from typing import List, Optional, Any, Dict
 from enum import Enum
 from pydantic import BaseModel, Field
 
@@ -27,6 +29,20 @@ class RiskLevel(str, Enum):
     MEDIUM = "MEDIUM"
     LOW = "LOW"
     NOT_ASSESSED = "NOT_ASSESSED"
+
+
+class VerificationStatus(str, Enum):
+    VERIFIED = "VERIFIED"
+    SIMILARITY_MATCH = "SIMILARITY_MATCH"
+    NOT_FOUND = "NOT_FOUND"
+    NEEDS_REVIEW = "NEEDS_REVIEW"
+
+
+class ComplianceOutcome(str, Enum):
+    CONFLICT = "CONFLICT"
+    COMPLIANT = "COMPLIANT"
+    POLICY_SILENT = "POLICY_SILENT"
+    NEEDS_REVIEW = "NEEDS_REVIEW"
 
 
 class AnalysisStatus(str, Enum):
@@ -54,6 +70,7 @@ class DocumentBase(BaseModel):
 
 class PolicyDocument(DocumentBase):
     type: Optional[str] = "POLICY"
+    version: Optional[str] = "1.0"
 
 
 class ContractDocument(DocumentBase):
@@ -80,7 +97,9 @@ class AnalysisJob(BaseModel):
 
 
 class Citation(BaseModel):
-    verified: Optional[bool] = True
+    verified: bool = False
+    status: VerificationStatus = VerificationStatus.NOT_FOUND
+    similarity_score: Optional[float] = None
     note: Optional[str] = None
 
 
@@ -93,6 +112,79 @@ class PolicyEvidence(BaseModel):
     highlight_start: Optional[int] = None
     highlight_end: Optional[int] = None
     citation: Citation
+    bboxes: Optional[List[List[float]]] = None  # [[x0, y0, x1, y1], ...]
+    page_width: Optional[float] = None
+    page_height: Optional[float] = None
+    document_version: Optional[str] = None
+
+
+# Evidence Chain Models (Priority 5)
+class ContractStep(BaseModel):
+    clause_number: str
+    quotation: str
+    page: int = 1
+
+
+class RetrievalStep(BaseModel):
+    document_name: str
+    section: Optional[str] = None
+    page: int = 1
+    method: str = "Hybrid BM25 + TF-IDF RRF"
+
+
+class VerificationStep(BaseModel):
+    match_status: str  # "VERIFIED" | "SIMILARITY_MATCH" | "NOT_FOUND" | "NEEDS_REVIEW"
+    page_confirmed: bool = True
+    section_confirmed: bool = True
+    document_version_confirmed: bool = True
+
+
+class ObligationExtraction(BaseModel):
+    contract_obligation: str
+    policy_obligation: str
+
+
+class ComparisonStep(BaseModel):
+    contract_value: str
+    policy_value: str
+    operator: str
+    comparison_result: str
+    is_conflict: bool
+
+
+class EvidenceChain(BaseModel):
+    contract: ContractStep
+    retrieval: Optional[RetrievalStep] = None
+    verification: Optional[VerificationStep] = None
+    extraction: Optional[ObligationExtraction] = None
+    comparison: Optional[ComparisonStep] = None
+    final_result: str  # "CONFLICT" | "COMPLIANT" | "POLICY_SILENT" | "NEEDS_REVIEW"
+
+
+# Structured Obligation Models (Priority 7)
+class PolicyObligation(BaseModel):
+    policy_id: str
+    document_name: str
+    version: str = "1.0"
+    section: str
+    topic: str
+    requirement: str
+    value: Optional[Any] = None
+    unit: Optional[str] = None
+    operator: str = "<="
+    severity: RiskLevel = RiskLevel.MEDIUM
+    source_page: int = 1
+    source_quote: str = ""
+
+
+class ContractObligation(BaseModel):
+    topic: str
+    requirement: str
+    value: Optional[Any] = None
+    unit: Optional[str] = None
+    raw_statement: str
+    clause_number: str
+    page: int = 1
 
 
 class ClauseFinding(BaseModel):
@@ -107,6 +199,35 @@ class ClauseFinding(BaseModel):
     suggested_redline: Optional[str] = None
     risk_score: Optional[float] = None
     risk_rationale: Optional[str] = None
+    outcome: Optional[ComplianceOutcome] = None
+    evidence_chain: Optional[EvidenceChain] = None
+    contract_obligation: Optional[ContractObligation] = None
+    policy_obligation: Optional[PolicyObligation] = None
+
+
+# Executive Summary Models (Priority 8)
+class TopIssue(BaseModel):
+    clause_number: str
+    issue_title: str
+    contract_value: str
+    policy_requirement: str
+    severity: RiskLevel
+    recommended_review_priority: int  # 1, 2, 3
+    rationale: str
+
+
+class ExecutiveSummary(BaseModel):
+    overall_risk: RiskLevel
+    total_clauses_analyzed: int
+    critical_count: int
+    high_count: int
+    medium_count: int
+    low_count: int
+    compliant_count: int
+    conflict_count: int
+    policy_silent_count: int
+    needs_review_count: int
+    top_issues: List[TopIssue] = Field(default_factory=list)
 
 
 class ReportSummary(BaseModel):
@@ -114,6 +235,10 @@ class ReportSummary(BaseModel):
     inferred: int
     no_conflict: int
     not_found: int
+    compliant: Optional[int] = None
+    conflict: Optional[int] = None
+    policy_silent: Optional[int] = None
+    needs_review: Optional[int] = None
 
 
 class DocumentRef(BaseModel):
@@ -128,6 +253,7 @@ class ComplianceReport(BaseModel):
     policies: List[DocumentRef]
     status: str = "COMPLETED"
     summary: Optional[ReportSummary] = None
+    executive_summary: Optional[ExecutiveSummary] = None
     clauses: List[ClauseFinding] = Field(default_factory=list)
 
 

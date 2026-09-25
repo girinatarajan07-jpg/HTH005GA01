@@ -4,6 +4,9 @@ export type RiskLevel = 'CRITICAL' | 'HIGH' | 'MEDIUM' | 'LOW' | 'NOT_ASSESSED';
 export type AnalysisStatus = 'QUEUED' | 'RUNNING' | 'COMPLETED' | 'FAILED';
 export type StepStatus = 'PENDING' | 'RUNNING' | 'DONE' | 'FAILED';
 
+export type VerificationStatus = 'VERIFIED' | 'SIMILARITY_MATCH' | 'NOT_FOUND' | 'NEEDS_REVIEW';
+export type ComplianceOutcome = 'CONFLICT' | 'COMPLIANT' | 'POLICY_SILENT' | 'NEEDS_REVIEW';
+
 export interface Document {
   id: string;
   name: string;
@@ -15,6 +18,7 @@ export interface Document {
 
 export interface PolicyDocument extends Document {
   type?: 'POLICY';
+  version?: string;
 }
 
 export interface ContractDocument extends Document {
@@ -42,6 +46,8 @@ export interface AnalysisJob {
 
 export interface Citation {
   verified: boolean | null;
+  status?: VerificationStatus;
+  similarity_score?: number | null;
   note?: string;
 }
 
@@ -54,6 +60,77 @@ export interface PolicyEvidence {
   highlight_start?: number;
   highlight_end?: number;
   citation: Citation;
+  bboxes?: number[][]; // [[x0, y0, x1, y1], ...]
+  page_width?: number;
+  page_height?: number;
+  document_version?: string;
+}
+
+// Evidence Chain Interfaces (Priority 5)
+export interface ContractStep {
+  clause_number: string;
+  quotation: string;
+  page: number;
+}
+
+export interface RetrievalStep {
+  document_name: string;
+  section?: string;
+  page: number;
+  method: string;
+}
+
+export interface VerificationStep {
+  match_status: string;
+  page_confirmed: boolean;
+  section_confirmed: boolean;
+  document_version_confirmed: boolean;
+}
+
+export interface ObligationExtraction {
+  contract_obligation: string;
+  policy_obligation: string;
+}
+
+export interface ComparisonStep {
+  contract_value: string;
+  policy_value: string;
+  operator: string;
+  comparison_result: string;
+  is_conflict: boolean;
+}
+
+export interface EvidenceChain {
+  contract: ContractStep;
+  retrieval?: RetrievalStep;
+  verification?: VerificationStep;
+  extraction?: ObligationExtraction;
+  comparison?: ComparisonStep;
+  final_result: string; // 'CONFLICT' | 'COMPLIANT' | 'POLICY_SILENT' | 'NEEDS_REVIEW'
+}
+
+export interface TopIssue {
+  clause_number: string;
+  issue_title: string;
+  contract_value: string;
+  policy_requirement: string;
+  severity: RiskLevel;
+  recommended_review_priority: number;
+  rationale: string;
+}
+
+export interface ExecutiveSummary {
+  overall_risk: RiskLevel;
+  total_clauses_analyzed: number;
+  critical_count: number;
+  high_count: number;
+  medium_count: number;
+  low_count: number;
+  compliant_count: number;
+  conflict_count: number;
+  policy_silent_count: number;
+  needs_review_count: number;
+  top_issues: TopIssue[];
 }
 
 export interface ClauseFinding {
@@ -68,6 +145,10 @@ export interface ClauseFinding {
   suggested_redline?: string | null;
   risk_score?: number | null;
   risk_rationale?: string | null;
+  outcome?: ComplianceOutcome;
+  evidence_chain?: EvidenceChain | null;
+  contract_obligation?: any;
+  policy_obligation?: any;
 }
 
 export interface ReportSummary {
@@ -75,6 +156,10 @@ export interface ReportSummary {
   inferred: number;
   no_conflict: number;
   not_found: number;
+  compliant?: number;
+  conflict?: number;
+  policy_silent?: number;
+  needs_review?: number;
 }
 
 export interface ComplianceReport {
@@ -90,6 +175,7 @@ export interface ComplianceReport {
   }[];
   status: 'COMPLETED' | 'IN_PROGRESS' | 'FAILED';
   summary: ReportSummary | null;
+  executive_summary?: ExecutiveSummary | null;
   clauses: ClauseFinding[];
 }
 
@@ -151,35 +237,38 @@ export interface ConfusionMatrix {
   total: number;
 }
 
-export interface EvalClauseComparison {
+export interface ClauseEvalComparison {
   clause_number: string;
   title: string;
-  ground_truth_classification: Classification;
-  predicted_classification: Classification;
-  ground_truth_confidence: Confidence;
-  predicted_confidence: Confidence;
-  ground_truth_risk: RiskLevel;
-  predicted_risk: RiskLevel;
+  ground_truth_classification: string;
+  predicted_classification: string;
+  outcome?: string;
+  ground_truth_confidence: string;
+  predicted_confidence: string;
+  ground_truth_risk: string;
+  predicted_risk: string;
   is_conflict: boolean;
   status: 'PASS' | 'DISCREPANCY';
   citation_verified: boolean;
   evidence_count: number;
-  citations: { text: string; verified: boolean; page: number; doc: string }[];
+  citations: {
+    text: string;
+    verified: boolean;
+    status?: string;
+    page: number;
+    doc: string;
+  }[];
   reasoning: string;
 }
 
-export interface EvaluationResult {
+export interface EvaluationResponse {
   benchmark_name: string;
   target_contract: string;
   total_clauses: number;
   metrics: EvalMetrics;
   confusion_matrix: ConfusionMatrix;
-  targets: {
-    min_recall: number;
-    min_precision: number;
-    min_not_found_correctness: number;
-    target_citation_accuracy: number;
-    target_hallucination_rate: number;
-  };
-  clauses: EvalClauseComparison[];
+  targets: Record<string, number>;
+  clauses: ClauseEvalComparison[];
 }
+
+export type EvaluationResult = EvaluationResponse;

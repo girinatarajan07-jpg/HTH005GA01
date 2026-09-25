@@ -1,0 +1,1559 @@
+{
+  "report_id": "rep-2026-0925-8e16",
+  "contract": {
+    "id": "ctr-01",
+    "name": "CloudScale_Inc_Master_Services_Agreement.pdf"
+  },
+  "created_at": "2026-09-25T00:26:37.921488+00:00",
+  "policies": [
+    {
+      "id": "pol-01",
+      "name": "POL-CBD-02_Cross_Border_Data_Transfer_Policy.pdf"
+    },
+    {
+      "id": "pol-02",
+      "name": "POL-DPA-04_Data_Protection_and_Privacy.pdf"
+    },
+    {
+      "id": "pol-03",
+      "name": "POL-SEC-2024-v3.2_Information_Security_Policy.pdf"
+    },
+    {
+      "id": "pol-04",
+      "name": "VRM-POL-09_Vendor_Risk_and_Procurement.pdf"
+    }
+  ],
+  "status": "COMPLETED",
+  "summary": {
+    "explicit_conflicts": 5,
+    "inferred": 3,
+    "no_conflict": 4,
+    "not_found": 3,
+    "compliant": 4,
+    "conflict": 8,
+    "policy_silent": 3,
+    "needs_review": 0
+  },
+  "executive_summary": {
+    "overall_risk": "CRITICAL",
+    "total_clauses_analyzed": 15,
+    "critical_count": 3,
+    "high_count": 4,
+    "medium_count": 1,
+    "low_count": 7,
+    "compliant_count": 4,
+    "conflict_count": 8,
+    "policy_silent_count": 3,
+    "needs_review_count": 0,
+    "top_issues": [
+      {
+        "clause_number": "Clause 3",
+        "issue_title": "Contract permits notification within 15 business days fol...",
+        "contract_value": "15 business days (~360 hours)",
+        "policy_requirement": "Security incident notification deadline",
+        "severity": "CRITICAL",
+        "recommended_review_priority": 1,
+        "rationale": "Critical governance violation exposing organization to uncapped liability, unmonitored breaches, or audit denial."
+      },
+      {
+        "clause_number": "Clause 5",
+        "issue_title": "Contract denies customer on-site audit rights and restric...",
+        "contract_value": "No on-site audit; 3-year questionnaire at customer expense",
+        "policy_requirement": "Unrestricted annual audit with maximum notice period",
+        "severity": "CRITICAL",
+        "recommended_review_priority": 2,
+        "rationale": "Critical governance violation exposing organization to uncapped liability, unmonitored breaches, or audit denial."
+      },
+      {
+        "clause_number": "Clause 6",
+        "issue_title": "Contract permits notification within 15 business days fol...",
+        "contract_value": "15 business days (~360 hours)",
+        "policy_requirement": "Security incident notification deadline",
+        "severity": "CRITICAL",
+        "recommended_review_priority": 3,
+        "rationale": "Critical governance violation exposing organization to uncapped liability, unmonitored breaches, or audit denial."
+      }
+    ]
+  },
+  "clauses": [
+    {
+      "clause_id": "clause-01",
+      "clause_number": "Clause 1",
+      "clause_text": "Clause 1: Provision of Services and Grant of License\nCloudScale Inc. ('Vendor') hereby grants to Customer a non-exclusive, non-transferable subscription right to access and\nutilize the CloudScale Analytics Platform during the applicable Term in accordance with the Order Form and standard\nservice terms.",
+      "classification": "NO_CONFLICT",
+      "confidence": "EXPLICITLY_STATED",
+      "risk_level": "LOW",
+      "explanation": "Standard service provision and subscription license grant conforming to procurement standards.",
+      "evidence": [
+        {
+          "document_id": "pol-04",
+          "document": "VRM-POL-09_Vendor_Risk_and_Procurement.pdf",
+          "page": 3,
+          "section": "Section 3.1: Invoicing and Payment Schedule Standards",
+          "text": "Section 3.1: Invoicing and Payment Schedule Standards\n\nAll vendor invoicing terms must strictly provide for payment within net-thirty (30) calendar days following receipt of an\nundisputed, valid invoice. Extended payment terms, including net-60, net-90, or uni",
+          "highlight_start": 0,
+          "highlight_end": 260,
+          "citation": {
+            "verified": true,
+            "status": "VERIFIED",
+            "similarity_score": 1.0,
+            "note": "Exact match verified in code (offsets 0–260)."
+          },
+          "bboxes": [
+            [
+              51.0,
+              50.16,
+              371.1,
+              66.68
+            ],
+            [
+              51.0,
+              70.29,
+              540.94,
+              83.34
+            ],
+            [
+              51.0,
+              84.29,
+              398.98,
+              97.34
+            ]
+          ],
+          "page_width": 612.0,
+          "page_height": 792.0,
+          "document_version": "2.1"
+        }
+      ],
+      "suggested_redline": null,
+      "risk_score": 5.0,
+      "risk_rationale": "Fully compliant with corporate governance baselines and security requirements.",
+      "outcome": "COMPLIANT",
+      "evidence_chain": {
+        "contract": {
+          "clause_number": "Clause 1",
+          "quotation": "Clause 1: Provision of Services and Grant of License\nCloudScale Inc. ('Vendor') hereby grants to Customer a non-exclusive, non-transferable subscription right t...",
+          "page": 1
+        },
+        "retrieval": {
+          "document_name": "VRM-POL-09_Vendor_Risk_and_Procurement.pdf",
+          "section": "Section 3.1: Invoicing and Payment Schedule Standards",
+          "page": 3,
+          "method": "Hybrid BM25 + TF-IDF RRF (k=60)"
+        },
+        "verification": {
+          "match_status": "VERIFIED",
+          "page_confirmed": true,
+          "section_confirmed": true,
+          "document_version_confirmed": true
+        },
+        "extraction": {
+          "contract_obligation": "Provide enterprise SaaS platform under standard commercial terms",
+          "policy_obligation": "Authorized software license and service provisioning baseline"
+        },
+        "comparison": {
+          "contract_value": "Enterprise SaaS license grant",
+          "policy_value": "standard_saas_license",
+          "operator": "==",
+          "comparison_result": "Standard license grant conforms to procurement baseline (Compliant)",
+          "is_conflict": false
+        },
+        "final_result": "COMPLIANT"
+      },
+      "contract_obligation": {
+        "topic": "PROVISION_OF_SERVICES",
+        "requirement": "Provide enterprise SaaS platform under standard commercial terms",
+        "value": "Enterprise SaaS license grant",
+        "unit": "procurement_standard",
+        "raw_statement": "Clause 1: Provision of Services and Grant of License\nCloudScale Inc. ('Vendor') hereby grants to Customer a non-exclusive, non-transferable subscription right to access and\nutilize the CloudScale Anal",
+        "clause_number": "Clause 1",
+        "page": 1
+      },
+      "policy_obligation": {
+        "policy_id": "VRM-POL-09",
+        "document_name": "VRM-POL-09_Vendor_Risk_and_Procurement.pdf",
+        "version": "2.1",
+        "section": "Section 1.1",
+        "topic": "PROVISION_OF_SERVICES",
+        "requirement": "Authorized software license and service provisioning baseline",
+        "value": "standard_saas_license",
+        "unit": "procurement_standard",
+        "operator": "==",
+        "severity": "LOW",
+        "source_page": 1,
+        "source_quote": "This policy governs all corporate systems, vendors, and third-party SaaS applications processing company data."
+      }
+    },
+    {
+      "clause_id": "clause-02",
+      "clause_number": "Clause 2",
+      "clause_text": "Clause 2: Security and Encryption Safeguards\nVendor shall exercise commercially reasonable efforts and general industry standards to protect Customer Data against\nunauthorized destruction or loss. The specific encryption algorithms and key management practices shall be determined\nat Vendor's sole discretion.",
+      "classification": "INFERRED",
+      "confidence": "INFERRED",
+      "risk_level": "HIGH",
+      "explanation": "Contract relies on vague 'commercially reasonable efforts' and leaves encryption algorithms to vendor discretion, which fails to guarantee mandatory baseline standards (AES-256 at rest, TLS 1.3 in transit) in Information Security Policy Section 2.1.",
+      "evidence": [
+        {
+          "document_id": "pol-03",
+          "document": "POL-SEC-2024-v3.2_Information_Security_Policy.pdf",
+          "page": 1,
+          "section": "Section 2.1: Mandatory Encryption Standards",
+          "text": "All sensitive customer and company data must be encrypted at rest using industry-standard AES-256 cipher suites. All\ndata in transit across public or untrusted networks must be encrypted using Transport Layer Security (TLS) protocol\nversion 1.3 (or minimum TLS",
+          "highlight_start": 501,
+          "highlight_end": 761,
+          "citation": {
+            "verified": true,
+            "status": "VERIFIED",
+            "similarity_score": 1.0,
+            "note": "Exact match verified in code (offsets 501–761)."
+          },
+          "bboxes": [
+            [
+              51.0,
+              215.79,
+              547.32,
+              228.84
+            ],
+            [
+              51.0,
+              229.79,
+              535.69,
+              242.84
+            ],
+            [
+              51.0,
+              243.79,
+              172.94,
+              256.84
+            ]
+          ],
+          "page_width": 612.0,
+          "page_height": 792.0,
+          "document_version": "3.2"
+        }
+      ],
+      "suggested_redline": "Vendor covenants that all sensitive Customer Data must be encrypted at rest using industry-standard AES-256 cipher suites. All data in transit across public or untrusted networks must be encrypted using Transport Layer Security (TLS) protocol version 1.3 (or minimum TLS 1.2 with perfect forward secrecy).",
+      "risk_score": 65.0,
+      "risk_rationale": "Ambiguous terms or missing baseline protections that create potential legal exposure.",
+      "outcome": "CONFLICT",
+      "evidence_chain": {
+        "contract": {
+          "clause_number": "Clause 2",
+          "quotation": "Clause 2: Security and Encryption Safeguards\nVendor shall exercise commercially reasonable efforts and general industry standards to protect Customer Data again...",
+          "page": 1
+        },
+        "retrieval": {
+          "document_name": "POL-SEC-2024-v3.2_Information_Security_Policy.pdf",
+          "section": "Section 2.1: Mandatory Encryption Standards",
+          "page": 1,
+          "method": "Hybrid BM25 + TF-IDF RRF (k=60)"
+        },
+        "verification": {
+          "match_status": "VERIFIED",
+          "page_confirmed": true,
+          "section_confirmed": true,
+          "document_version_confirmed": true
+        },
+        "extraction": {
+          "contract_obligation": "Vendor determines encryption algorithms at sole discretion",
+          "policy_obligation": "Mandatory AES-256 at rest and TLS 1.3 in transit"
+        },
+        "comparison": {
+          "contract_value": "Commercially reasonable efforts / vendor discretion",
+          "policy_value": "AES-256 / TLS 1.3",
+          "operator": "==",
+          "comparison_result": "Vendor discretion / vague efforts != Mandatory AES-256 & TLS 1.3",
+          "is_conflict": true
+        },
+        "final_result": "CONFLICT"
+      },
+      "contract_obligation": {
+        "topic": "ENCRYPTION_STANDARDS",
+        "requirement": "Vendor determines encryption algorithms at sole discretion",
+        "value": "Commercially reasonable efforts / vendor discretion",
+        "unit": "cipher_suites",
+        "raw_statement": "Clause 2: Security and Encryption Safeguards\nVendor shall exercise commercially reasonable efforts and general industry standards to protect Customer Data against\nunauthorized destruction or loss. The",
+        "clause_number": "Clause 2",
+        "page": 1
+      },
+      "policy_obligation": {
+        "policy_id": "POL-SEC-2024-v3.2",
+        "document_name": "POL-SEC-2024-v3.2_Information_Security_Policy.pdf",
+        "version": "3.2",
+        "section": "Section 2.1: Mandatory Encryption Standards",
+        "topic": "ENCRYPTION_STANDARDS",
+        "requirement": "Mandatory AES-256 at rest and TLS 1.3 in transit",
+        "value": "AES-256 / TLS 1.3",
+        "unit": "cipher_suites",
+        "operator": "==",
+        "severity": "HIGH",
+        "source_page": 1,
+        "source_quote": "All sensitive customer and company data must be encrypted at rest using industry-standard AES-256 cipher suites. All data in transit across public or untrusted networks must be encrypted using Transport Layer Security (TLS) protocol version 1.3 (or minimum TLS 1.2 with perfect forward secrecy)."
+      }
+    },
+    {
+      "clause_id": "clause-03",
+      "clause_number": "Clause 3",
+      "clause_text": "Clause 3: Security Incident Notification\nVendor shall notify Customer in writing of any confirmed unauthorized intrusion resulting in actual data exfiltration within\nfifteen (15) business days following Vendor's internal completion of forensic investigation.",
+      "classification": "EXPLICIT_CONFLICT",
+      "confidence": "EXPLICITLY_STATED",
+      "risk_level": "CRITICAL",
+      "explanation": "Contract permits notification within 15 business days following internal investigation, directly violating Enterprise Information Security Policy Section 3.2 mandating written notification within twenty-four (24) hours of discovery.",
+      "evidence": [
+        {
+          "document_id": "pol-03",
+          "document": "POL-SEC-2024-v3.2_Information_Security_Policy.pdf",
+          "page": 2,
+          "section": "Section 4.1: Vulnerability Remediation SLAs",
+          "text": "Section 3.2: Security Incident Notification Timelines\n\nIn the event of a confirmed or suspected Security Incident, unauthorized access, or Data Breach, any contracted service\nprovider or vendor must notify the Company Information Security Team in writing withi",
+          "highlight_start": 0,
+          "highlight_end": 260,
+          "citation": {
+            "verified": true,
+            "status": "VERIFIED",
+            "similarity_score": 1.0,
+            "note": "Exact match verified in code (offsets 0–260)."
+          },
+          "bboxes": [
+            [
+              51.0,
+              50.16,
+              346.42,
+              66.68
+            ],
+            [
+              51.0,
+              70.29,
+              555.27,
+              83.34
+            ],
+            [
+              51.0,
+              84.29,
+              411.59,
+              97.34
+            ]
+          ],
+          "page_width": 612.0,
+          "page_height": 792.0,
+          "document_version": "3.2"
+        }
+      ],
+      "suggested_redline": "Vendor shall notify Customer in writing within twenty-four (24) hours of initial discovery of any confirmed or suspected Security Incident, unauthorized access, or Data Breach. The notification must include root cause, impacted data records, and immediate mitigations.",
+      "risk_score": 96.0,
+      "risk_rationale": "Critical governance violation exposing organization to uncapped liability, unmonitored breaches, or audit denial.",
+      "outcome": "CONFLICT",
+      "evidence_chain": {
+        "contract": {
+          "clause_number": "Clause 3",
+          "quotation": "Clause 3: Security Incident Notification\nVendor shall notify Customer in writing of any confirmed unauthorized intrusion resulting in actual data exfiltration w...",
+          "page": 1
+        },
+        "retrieval": {
+          "document_name": "POL-SEC-2024-v3.2_Information_Security_Policy.pdf",
+          "section": "Section 4.1: Vulnerability Remediation SLAs",
+          "page": 2,
+          "method": "Hybrid BM25 + TF-IDF RRF (k=60)"
+        },
+        "verification": {
+          "match_status": "VERIFIED",
+          "page_confirmed": true,
+          "section_confirmed": true,
+          "document_version_confirmed": true
+        },
+        "extraction": {
+          "contract_obligation": "Written notification within 15 business days following internal investigation",
+          "policy_obligation": "Security incident notification deadline"
+        },
+        "comparison": {
+          "contract_value": "15 business days (~360 hours)",
+          "policy_value": "24",
+          "operator": "<=",
+          "comparison_result": "15 business days (360 hours) > 24 hours (Critical breach SLA conflict)",
+          "is_conflict": true
+        },
+        "final_result": "CONFLICT"
+      },
+      "contract_obligation": {
+        "topic": "INCIDENT_NOTIFICATION",
+        "requirement": "Written notification within 15 business days following internal investigation",
+        "value": "15 business days (~360 hours)",
+        "unit": "hours",
+        "raw_statement": "Clause 3: Security Incident Notification\nVendor shall notify Customer in writing of any confirmed unauthorized intrusion resulting in actual data exfiltration within\nfifteen (15) business days followi",
+        "clause_number": "Clause 3",
+        "page": 1
+      },
+      "policy_obligation": {
+        "policy_id": "POL-SEC-2024-v3.2",
+        "document_name": "POL-SEC-2024-v3.2_Information_Security_Policy.pdf",
+        "version": "3.2",
+        "section": "Section 3.2: Security Incident Notification Timelines",
+        "topic": "INCIDENT_NOTIFICATION",
+        "requirement": "Security incident notification deadline",
+        "value": 24,
+        "unit": "hours",
+        "operator": "<=",
+        "severity": "CRITICAL",
+        "source_page": 2,
+        "source_quote": "In the event of a confirmed or suspected Security Incident, unauthorized access, or Data Breach, any contracted service provider or vendor must notify the Company Information Security Team in writing within twenty-four (24) hours of initial discovery."
+      }
+    },
+    {
+      "clause_id": "clause-04",
+      "clause_number": "Clause 4",
+      "clause_text": "Clause 4: Subprocessor Engagement and Notice\nVendor reserves the operational right to engage third-party subprocessors and subcontractors at any time without prior\ncustomer notice or consent, provided Vendor maintains general oversight of such entities.",
+      "classification": "INFERRED",
+      "confidence": "INFERRED",
+      "risk_level": "HIGH",
+      "explanation": "Contract permits vendor to engage subprocessors without customer notice or consent, directly bypassing Data Protection & Privacy Policy Section 2.3 requiring 30 days prior written notice and customer objection rights.",
+      "evidence": [
+        {
+          "document_id": "pol-02",
+          "document": "POL-DPA-04_Data_Protection_and_Privacy.pdf",
+          "page": 1,
+          "section": "Section 2.3: Subprocessor Authorization Requirements",
+          "text": "Data Protection & Privacy Compliance Standards\n\nCorporate Governance Policy Manual  |  Document Ref: POL-DPA-04  |  Version 3.4\n\nSection 1.2: Customer Data Ownership & Processing\n\nThe Company retains exclusive title, ownership, and all intellectual property ri",
+          "highlight_start": 0,
+          "highlight_end": 260,
+          "citation": {
+            "verified": true,
+            "status": "VERIFIED",
+            "similarity_score": 1.0,
+            "note": "Exact match verified in code (offsets 0–260)."
+          },
+          "bboxes": [
+            [
+              51.0,
+              49.74,
+              471.12,
+              74.53
+            ],
+            [
+              51.0,
+              78.32,
+              387.3,
+              90.69
+            ],
+            [
+              51.0,
+              113.66,
+              352.42,
+              130.18
+            ],
+            [
+              51.0,
+              133.79,
+              375.7,
+              146.84
+            ]
+          ],
+          "page_width": 612.0,
+          "page_height": 792.0,
+          "document_version": "4.0"
+        }
+      ],
+      "suggested_redline": "Vendor shall not engage third-party subprocessors without providing at least thirty (30) days prior written notice to Customer. Customer maintains the explicit right to object to any new subprocessor on data protection and compliance grounds.",
+      "risk_score": 65.0,
+      "risk_rationale": "Ambiguous terms or missing baseline protections that create potential legal exposure.",
+      "outcome": "CONFLICT",
+      "evidence_chain": {
+        "contract": {
+          "clause_number": "Clause 4",
+          "quotation": "Clause 4: Subprocessor Engagement and Notice\nVendor reserves the operational right to engage third-party subprocessors and subcontractors at any time without pr...",
+          "page": 2
+        },
+        "retrieval": {
+          "document_name": "POL-DPA-04_Data_Protection_and_Privacy.pdf",
+          "section": "Section 2.3: Subprocessor Authorization Requirements",
+          "page": 1,
+          "method": "Hybrid BM25 + TF-IDF RRF (k=60)"
+        },
+        "verification": {
+          "match_status": "VERIFIED",
+          "page_confirmed": true,
+          "section_confirmed": true,
+          "document_version_confirmed": true
+        },
+        "extraction": {
+          "contract_obligation": "Engage subprocessors without prior customer notice or consent",
+          "policy_obligation": "Prior written notice and customer objection rights"
+        },
+        "comparison": {
+          "contract_value": "0 days notice (unrestricted unilateral engagement)",
+          "policy_value": "30",
+          "operator": ">=",
+          "comparison_result": "0 days notice & no consent < 30 days notice with explicit objection rights",
+          "is_conflict": true
+        },
+        "final_result": "CONFLICT"
+      },
+      "contract_obligation": {
+        "topic": "SUBPROCESSOR_NOTICE",
+        "requirement": "Engage subprocessors without prior customer notice or consent",
+        "value": "0 days notice (unrestricted unilateral engagement)",
+        "unit": "calendar_days",
+        "raw_statement": "Clause 4: Subprocessor Engagement and Notice\nVendor reserves the operational right to engage third-party subprocessors and subcontractors at any time without prior\ncustomer notice or consent, provided",
+        "clause_number": "Clause 4",
+        "page": 2
+      },
+      "policy_obligation": {
+        "policy_id": "POL-DPA-04",
+        "document_name": "POL-DPA-04_Data_Protection_and_Privacy.pdf",
+        "version": "4.0",
+        "section": "Section 2.3: Subprocessor Authorization Requirements",
+        "topic": "SUBPROCESSOR_NOTICE",
+        "requirement": "Prior written notice and customer objection rights",
+        "value": 30,
+        "unit": "calendar_days",
+        "operator": ">=",
+        "severity": "HIGH",
+        "source_page": 2,
+        "source_quote": "Vendors shall not engage third-party subprocessors without providing at least thirty (30) days prior written notice to the Company. The Company maintains the explicit right to object to any new subprocessor on data protection grounds."
+      }
+    },
+    {
+      "clause_id": "clause-05",
+      "clause_number": "Clause 5",
+      "clause_text": "Clause 5: Customer Audit and Inspection Rights\nCustomer shall have no right to conduct on-site physical audits or inspect Vendor's server facilities. Any compliance\ninquiries must be submitted in writing and Vendor may, at its sole discretion and at Customer's expense, provide a\nsummary security questionnaire once every three (3) years.",
+      "classification": "EXPLICIT_CONFLICT",
+      "confidence": "EXPLICITLY_STATED",
+      "risk_level": "CRITICAL",
+      "explanation": "Contract denies customer on-site audit rights and restricts inquiries to a 3-year questionnaire at customer expense, directly violating Vendor Risk Management Policy Section 1.1 reserving unrestricted annual audit rights with 10 business days notice.",
+      "evidence": [
+        {
+          "document_id": "pol-04",
+          "document": "VRM-POL-09_Vendor_Risk_and_Procurement.pdf",
+          "page": 1,
+          "section": "Section 1.1: Mandatory Audit and Inspection Rights",
+          "text": "Vendor Risk Management & Procurement Standards\n\nCorporate Governance Policy Manual  |  Document Ref: VRM-POL-09  |  Version 3.4\n\nSection 1.1: Mandatory Audit and Inspection Rights\n\nThe Company, or its designated independent certified public accounting firm, re",
+          "highlight_start": 0,
+          "highlight_end": 260,
+          "citation": {
+            "verified": true,
+            "status": "VERIFIED",
+            "similarity_score": 1.0,
+            "note": "Exact match verified in code (offsets 0–260)."
+          },
+          "bboxes": [
+            [
+              51.0,
+              49.74,
+              498.1,
+              74.53
+            ],
+            [
+              51.0,
+              78.32,
+              388.3,
+              90.69
+            ],
+            [
+              51.0,
+              113.66,
+              345.05,
+              130.18
+            ],
+            [
+              51.0,
+              133.79,
+              384.33,
+              146.84
+            ]
+          ],
+          "page_width": 612.0,
+          "page_height": 792.0,
+          "document_version": "2.1"
+        }
+      ],
+      "suggested_redline": "Customer, or its designated independent certified public accounting firm, reserves the unrestricted right to conduct an annual on-site or virtual audit of Vendor facilities, security controls, and operational infrastructure with ten (10) business days prior written notice. Vendor shall furnish annual SOC 2 Type II or ISO 27001 audit certifications.",
+      "risk_score": 96.0,
+      "risk_rationale": "Critical governance violation exposing organization to uncapped liability, unmonitored breaches, or audit denial.",
+      "outcome": "CONFLICT",
+      "evidence_chain": {
+        "contract": {
+          "clause_number": "Clause 5",
+          "quotation": "Clause 5: Customer Audit and Inspection Rights\nCustomer shall have no right to conduct on-site physical audits or inspect Vendor's server facilities. Any compli...",
+          "page": 2
+        },
+        "retrieval": {
+          "document_name": "VRM-POL-09_Vendor_Risk_and_Procurement.pdf",
+          "section": "Section 1.1: Mandatory Audit and Inspection Rights",
+          "page": 1,
+          "method": "Hybrid BM25 + TF-IDF RRF (k=60)"
+        },
+        "verification": {
+          "match_status": "VERIFIED",
+          "page_confirmed": true,
+          "section_confirmed": true,
+          "document_version_confirmed": true
+        },
+        "extraction": {
+          "contract_obligation": "Restrict inspection to questionnaire once every 3 years",
+          "policy_obligation": "Unrestricted annual audit with maximum notice period"
+        },
+        "comparison": {
+          "contract_value": "No on-site audit; 3-year questionnaire at customer expense",
+          "policy_value": "10",
+          "operator": "<=",
+          "comparison_result": "No on-site audit right & 3-year limitation != Unrestricted annual audit with <= 10 days notice",
+          "is_conflict": true
+        },
+        "final_result": "CONFLICT"
+      },
+      "contract_obligation": {
+        "topic": "CUSTOMER_AUDIT",
+        "requirement": "Restrict inspection to questionnaire once every 3 years",
+        "value": "No on-site audit; 3-year questionnaire at customer expense",
+        "unit": "business_days",
+        "raw_statement": "Clause 5: Customer Audit and Inspection Rights\nCustomer shall have no right to conduct on-site physical audits or inspect Vendor's server facilities. Any compliance\ninquiries must be submitted in writ",
+        "clause_number": "Clause 5",
+        "page": 2
+      },
+      "policy_obligation": {
+        "policy_id": "VRM-POL-09",
+        "document_name": "VRM-POL-09_Vendor_Risk_and_Procurement.pdf",
+        "version": "2.1",
+        "section": "Section 1.1: Mandatory Audit and Inspection Rights",
+        "topic": "CUSTOMER_AUDIT",
+        "requirement": "Unrestricted annual audit with maximum notice period",
+        "value": 10,
+        "unit": "business_days",
+        "operator": "<=",
+        "severity": "CRITICAL",
+        "source_page": 1,
+        "source_quote": "The Company, or its designated independent certified public accounting firm, reserves the unrestricted right to conduct an annual on-site or virtual audit of vendor facilities, security controls, and operational infrastructure with ten (10) business days prior notice."
+      }
+    },
+    {
+      "clause_id": "clause-06",
+      "clause_number": "Clause 6",
+      "clause_text": "Clause 6: Limitation of Liability and Breach Damages\nUnder no circumstances shall Vendor's total aggregate liability arising out of or related to this Agreement exceed the total\nfees actually paid by Customer in the one (1) month preceding the incident, including in connection with data breaches,\nsystem outages, or confidentiality claims.",
+      "classification": "EXPLICIT_CONFLICT",
+      "confidence": "EXPLICITLY_STATED",
+      "risk_level": "CRITICAL",
+      "explanation": "Contract permits notification within 15 business days following internal investigation, directly violating Enterprise Information Security Policy Section 3.2 mandating written notification within twenty-four (24) hours of discovery.",
+      "evidence": [
+        {
+          "document_id": "pol-04",
+          "document": "VRM-POL-09_Vendor_Risk_and_Procurement.pdf",
+          "page": 2,
+          "section": "Section 2.2: Limitation of Liability Exceptions and Breach Caps",
+          "text": "Section 2.2: Limitation of Liability Exceptions and Breach Caps\n\nStandard contract terms must prohibit aggregate liability caps that apply to data privacy breaches, unauthorized\ndisclosure of confidential information, intellectual property infringement, or gro",
+          "highlight_start": 0,
+          "highlight_end": 260,
+          "citation": {
+            "verified": true,
+            "status": "VERIFIED",
+            "similarity_score": 1.0,
+            "note": "Exact match verified in code (offsets 0–260)."
+          },
+          "bboxes": [
+            [
+              51.0,
+              50.16,
+              411.1,
+              66.68
+            ],
+            [
+              51.0,
+              70.29,
+              518.83,
+              83.34
+            ],
+            [
+              51.0,
+              84.29,
+              377.3,
+              97.34
+            ]
+          ],
+          "page_width": 612.0,
+          "page_height": 792.0,
+          "document_version": "3.2"
+        }
+      ],
+      "suggested_redline": "Vendor shall notify Customer in writing within twenty-four (24) hours of initial discovery of any confirmed or suspected Security Incident, unauthorized access, or Data Breach. The notification must include root cause, impacted data records, and immediate mitigations.",
+      "risk_score": 96.0,
+      "risk_rationale": "Critical governance violation exposing organization to uncapped liability, unmonitored breaches, or audit denial.",
+      "outcome": "CONFLICT",
+      "evidence_chain": {
+        "contract": {
+          "clause_number": "Clause 6",
+          "quotation": "Clause 6: Limitation of Liability and Breach Damages\nUnder no circumstances shall Vendor's total aggregate liability arising out of or related to this Agreement...",
+          "page": 2
+        },
+        "retrieval": {
+          "document_name": "VRM-POL-09_Vendor_Risk_and_Procurement.pdf",
+          "section": "Section 2.2: Limitation of Liability Exceptions and Breach Caps",
+          "page": 2,
+          "method": "Hybrid BM25 + TF-IDF RRF (k=60)"
+        },
+        "verification": {
+          "match_status": "VERIFIED",
+          "page_confirmed": true,
+          "section_confirmed": true,
+          "document_version_confirmed": true
+        },
+        "extraction": {
+          "contract_obligation": "Written notification within 15 business days following internal investigation",
+          "policy_obligation": "Security incident notification deadline"
+        },
+        "comparison": {
+          "contract_value": "15 business days (~360 hours)",
+          "policy_value": "24",
+          "operator": "<=",
+          "comparison_result": "15 business days (360 hours) > 24 hours (Critical breach SLA conflict)",
+          "is_conflict": true
+        },
+        "final_result": "CONFLICT"
+      },
+      "contract_obligation": {
+        "topic": "INCIDENT_NOTIFICATION",
+        "requirement": "Written notification within 15 business days following internal investigation",
+        "value": "15 business days (~360 hours)",
+        "unit": "hours",
+        "raw_statement": "Clause 6: Limitation of Liability and Breach Damages\nUnder no circumstances shall Vendor's total aggregate liability arising out of or related to this Agreement exceed the total\nfees actually paid by ",
+        "clause_number": "Clause 6",
+        "page": 2
+      },
+      "policy_obligation": {
+        "policy_id": "POL-SEC-2024-v3.2",
+        "document_name": "POL-SEC-2024-v3.2_Information_Security_Policy.pdf",
+        "version": "3.2",
+        "section": "Section 3.2: Security Incident Notification Timelines",
+        "topic": "INCIDENT_NOTIFICATION",
+        "requirement": "Security incident notification deadline",
+        "value": 24,
+        "unit": "hours",
+        "operator": "<=",
+        "severity": "CRITICAL",
+        "source_page": 2,
+        "source_quote": "In the event of a confirmed or suspected Security Incident, unauthorized access, or Data Breach, any contracted service provider or vendor must notify the Company Information Security Team in writing within twenty-four (24) hours of initial discovery."
+      }
+    },
+    {
+      "clause_id": "clause-07",
+      "clause_number": "Clause 7",
+      "clause_text": "Clause 7: Data Retention and Deletion\nFollowing contract termination, Vendor may retain copies of Customer Data indefinitely in archival backup systems,\nprovided such data remains subject to Vendor's general privacy practices.",
+      "classification": "EXPLICIT_CONFLICT",
+      "confidence": "EXPLICITLY_STATED",
+      "risk_level": "HIGH",
+      "explanation": "Contract authorizes vendor to retain customer data indefinitely in archival backup systems, directly violating Data Protection & Privacy Policy Section 3.4 mandating return or destruction within 30 days of termination.",
+      "evidence": [
+        {
+          "document_id": "pol-02",
+          "document": "POL-DPA-04_Data_Protection_and_Privacy.pdf",
+          "page": 2,
+          "section": "Section 4.2: Data Subject Rights and Requests",
+          "text": "Section 3.4: Data Return and Secure Destruction\n\nWithin thirty (30) calendar days of agreement termination or expiration, the vendor must securely return or permanently\ndestroy all Company Data in compliance with NIST SP 800-88 sanitization standards. Written ",
+          "highlight_start": 0,
+          "highlight_end": 260,
+          "citation": {
+            "verified": true,
+            "status": "VERIFIED",
+            "similarity_score": 1.0,
+            "note": "Exact match verified in code (offsets 0–260)."
+          },
+          "bboxes": [
+            [
+              51.0,
+              50.16,
+              327.73,
+              66.68
+            ],
+            [
+              51.0,
+              70.29,
+              549.94,
+              83.34
+            ],
+            [
+              51.0,
+              84.29,
+              442.23,
+              97.34
+            ]
+          ],
+          "page_width": 612.0,
+          "page_height": 792.0,
+          "document_version": "4.0"
+        }
+      ],
+      "suggested_redline": "Within thirty (30) calendar days of agreement termination or expiration, Vendor must securely return or permanently destroy all Customer Data in compliance with NIST SP 800-88 sanitization standards. Written certificate of destruction signed by an authorized officer must be delivered within five (5) business days thereafter.",
+      "risk_score": 85.0,
+      "risk_rationale": "Direct conflict with corporate governance standards requiring executive renegotiation.",
+      "outcome": "CONFLICT",
+      "evidence_chain": {
+        "contract": {
+          "clause_number": "Clause 7",
+          "quotation": "Clause 7: Data Retention and Deletion\nFollowing contract termination, Vendor may retain copies of Customer Data indefinitely in archival backup systems,\nprovide...",
+          "page": 3
+        },
+        "retrieval": {
+          "document_name": "POL-DPA-04_Data_Protection_and_Privacy.pdf",
+          "section": "Section 4.2: Data Subject Rights and Requests",
+          "page": 2,
+          "method": "Hybrid BM25 + TF-IDF RRF (k=60)"
+        },
+        "verification": {
+          "match_status": "VERIFIED",
+          "page_confirmed": true,
+          "section_confirmed": true,
+          "document_version_confirmed": true
+        },
+        "extraction": {
+          "contract_obligation": "Vendor may retain copies in archival backups indefinitely",
+          "policy_obligation": "Post-termination data return or destruction deadline"
+        },
+        "comparison": {
+          "contract_value": "Indefinite archival retention",
+          "policy_value": "30",
+          "operator": "<=",
+          "comparison_result": "Indefinite retention > 30 calendar days destruction deadline",
+          "is_conflict": true
+        },
+        "final_result": "CONFLICT"
+      },
+      "contract_obligation": {
+        "topic": "DATA_RETENTION_DELETION",
+        "requirement": "Vendor may retain copies in archival backups indefinitely",
+        "value": "Indefinite archival retention",
+        "unit": "calendar_days",
+        "raw_statement": "Clause 7: Data Retention and Deletion\nFollowing contract termination, Vendor may retain copies of Customer Data indefinitely in archival backup systems,\nprovided such data remains subject to Vendor's ",
+        "clause_number": "Clause 7",
+        "page": 3
+      },
+      "policy_obligation": {
+        "policy_id": "POL-DPA-04",
+        "document_name": "POL-DPA-04_Data_Protection_and_Privacy.pdf",
+        "version": "4.0",
+        "section": "Section 3.4: Data Return and Secure Destruction",
+        "topic": "DATA_RETENTION_DELETION",
+        "requirement": "Post-termination data return or destruction deadline",
+        "value": 30,
+        "unit": "calendar_days",
+        "operator": "<=",
+        "severity": "HIGH",
+        "source_page": 3,
+        "source_quote": "Within thirty (30) calendar days of agreement termination or expiration, the vendor must securely return or permanently destroy all Company Data in compliance with NIST SP 800-88 sanitization standards."
+      }
+    },
+    {
+      "clause_id": "clause-08",
+      "clause_number": "Clause 8",
+      "clause_text": "Clause 8: Invoicing and Payment Terms\nCustomer agrees to pay all undisputed invoices within ninety (90) calendar days of invoice receipt. Vendor reserves the\nright to charge late interest of 2.5% per month on any delinquent amounts.",
+      "classification": "EXPLICIT_CONFLICT",
+      "confidence": "EXPLICITLY_STATED",
+      "risk_level": "HIGH",
+      "explanation": "Contract stipulates a 90-day payment cycle with 2.5% monthly late interest, which directly violates Vendor Risk & Procurement Policy Section 3.1 requiring all invoices to be paid within net-30 calendar days.",
+      "evidence": [
+        {
+          "document_id": "pol-04",
+          "document": "VRM-POL-09_Vendor_Risk_and_Procurement.pdf",
+          "page": 3,
+          "section": "Section 3.1: Invoicing and Payment Schedule Standards",
+          "text": "Section 3.1: Invoicing and Payment Schedule Standards\n\nAll vendor invoicing terms must strictly provide for payment within net-thirty (30) calendar days following receipt of an\nundisputed, valid invoice. Extended payment terms, including net-60, net-90, or uni",
+          "highlight_start": 0,
+          "highlight_end": 260,
+          "citation": {
+            "verified": true,
+            "status": "VERIFIED",
+            "similarity_score": 1.0,
+            "note": "Exact match verified in code (offsets 0–260)."
+          },
+          "bboxes": [
+            [
+              51.0,
+              50.16,
+              371.1,
+              66.68
+            ],
+            [
+              51.0,
+              70.29,
+              540.94,
+              83.34
+            ],
+            [
+              51.0,
+              84.29,
+              398.98,
+              97.34
+            ]
+          ],
+          "page_width": 612.0,
+          "page_height": 792.0,
+          "document_version": "2.1"
+        }
+      ],
+      "suggested_redline": "Customer agrees to pay all undisputed, valid invoices within thirty (30) calendar days of invoice receipt. Vendor shall not charge late interest exceeding statutory limits, and no unilateral fee escalation shall apply.",
+      "risk_score": 85.0,
+      "risk_rationale": "Direct conflict with corporate governance standards requiring executive renegotiation.",
+      "outcome": "CONFLICT",
+      "evidence_chain": {
+        "contract": {
+          "clause_number": "Clause 8",
+          "quotation": "Clause 8: Invoicing and Payment Terms\nCustomer agrees to pay all undisputed invoices within ninety (90) calendar days of invoice receipt. Vendor reserves the\nri...",
+          "page": 3
+        },
+        "retrieval": {
+          "document_name": "VRM-POL-09_Vendor_Risk_and_Procurement.pdf",
+          "section": "Section 3.1: Invoicing and Payment Schedule Standards",
+          "page": 3,
+          "method": "Hybrid BM25 + TF-IDF RRF (k=60)"
+        },
+        "verification": {
+          "match_status": "VERIFIED",
+          "page_confirmed": true,
+          "section_confirmed": true,
+          "document_version_confirmed": true
+        },
+        "extraction": {
+          "contract_obligation": "Payment due within ninety (90) calendar days + 2.5% monthly late fees",
+          "policy_obligation": "Maximum invoice payment schedule"
+        },
+        "comparison": {
+          "contract_value": "90",
+          "policy_value": "30",
+          "operator": "<=",
+          "comparison_result": "90 calendar days > 30 calendar days (Conflict with Net-30 payment standard)",
+          "is_conflict": true
+        },
+        "final_result": "CONFLICT"
+      },
+      "contract_obligation": {
+        "topic": "PAYMENT_TERMS",
+        "requirement": "Payment due within ninety (90) calendar days + 2.5% monthly late fees",
+        "value": 90,
+        "unit": "calendar_days",
+        "raw_statement": "Clause 8: Invoicing and Payment Terms\nCustomer agrees to pay all undisputed invoices within ninety (90) calendar days of invoice receipt. Vendor reserves the\nright to charge late interest of 2.5% per ",
+        "clause_number": "Clause 8",
+        "page": 3
+      },
+      "policy_obligation": {
+        "policy_id": "VRM-POL-09",
+        "document_name": "VRM-POL-09_Vendor_Risk_and_Procurement.pdf",
+        "version": "2.1",
+        "section": "Section 3.1: Invoicing and Payment Schedule Standards",
+        "topic": "PAYMENT_TERMS",
+        "requirement": "Maximum invoice payment schedule",
+        "value": 30,
+        "unit": "calendar_days",
+        "operator": "<=",
+        "severity": "HIGH",
+        "source_page": 2,
+        "source_quote": "All vendor invoicing terms must strictly provide for payment within net-thirty (30) calendar days following receipt of an undisputed, valid invoice. Extended payment terms, including net-60, net-90, or unilateral late fee charges exceeding statutory limits, are non-compliant without CFO approval."
+      }
+    },
+    {
+      "clause_id": "clause-09",
+      "clause_number": "Clause 9",
+      "clause_text": "Clause 9: Vulnerability Remediation and Patch Cycles\nVendor will address reported critical system vulnerabilities as part of its standard quarterly release cycle, unless\nemergency out-of-band updates are deemed essential by Vendor's engineering team.",
+      "classification": "INFERRED",
+      "confidence": "INFERRED",
+      "risk_level": "MEDIUM",
+      "explanation": "Contract commits only to addressing critical flaws in quarterly release cycles, which falls short of the mandatory 7-day remediation SLA for critical vulnerabilities (CVSS >= 9.0) mandated by Information Security Policy Section 4.1.",
+      "evidence": [
+        {
+          "document_id": "pol-03",
+          "document": "POL-SEC-2024-v3.2_Information_Security_Policy.pdf",
+          "page": 2,
+          "section": "Section 4.1: Vulnerability Remediation SLAs",
+          "text": "Section 3.2: Security Incident Notification Timelines\n\nIn the event of a confirmed or suspected Security Incident, unauthorized access, or Data Breach, any contracted service\nprovider or vendor must notify the Company Information Security Team in writing withi",
+          "highlight_start": 0,
+          "highlight_end": 260,
+          "citation": {
+            "verified": true,
+            "status": "VERIFIED",
+            "similarity_score": 1.0,
+            "note": "Exact match verified in code (offsets 0–260)."
+          },
+          "bboxes": [
+            [
+              51.0,
+              50.16,
+              346.42,
+              66.68
+            ],
+            [
+              51.0,
+              70.29,
+              555.27,
+              83.34
+            ],
+            [
+              51.0,
+              84.29,
+              411.59,
+              97.34
+            ]
+          ],
+          "page_width": 612.0,
+          "page_height": 792.0,
+          "document_version": "3.2"
+        }
+      ],
+      "suggested_redline": "Vendor must remediate critical vulnerabilities (CVSS score >= 9.0) within seven (7) calendar days of public disclosure. High severity vulnerabilities must be remediated within thirty (30) calendar days. Ordinary release deferrals for critical patches are strictly prohibited.",
+      "risk_score": 48.0,
+      "risk_rationale": "Vague standard of care or implicit variance requiring counsel clarification.",
+      "outcome": "CONFLICT",
+      "evidence_chain": {
+        "contract": {
+          "clause_number": "Clause 9",
+          "quotation": "Clause 9: Vulnerability Remediation and Patch Cycles\nVendor will address reported critical system vulnerabilities as part of its standard quarterly release cycl...",
+          "page": 3
+        },
+        "retrieval": {
+          "document_name": "POL-SEC-2024-v3.2_Information_Security_Policy.pdf",
+          "section": "Section 4.1: Vulnerability Remediation SLAs",
+          "page": 2,
+          "method": "Hybrid BM25 + TF-IDF RRF (k=60)"
+        },
+        "verification": {
+          "match_status": "VERIFIED",
+          "page_confirmed": true,
+          "section_confirmed": true,
+          "document_version_confirmed": true
+        },
+        "extraction": {
+          "contract_obligation": "Remediate critical security vulnerabilities in routine quarterly releases",
+          "policy_obligation": "Critical vulnerability remediation SLA (CVSS >= 9.0)"
+        },
+        "comparison": {
+          "contract_value": "Quarterly release cycles (~90 calendar days)",
+          "policy_value": "7",
+          "operator": "<=",
+          "comparison_result": "Quarterly (~90 calendar days) > 7 calendar days SLA for CVSS >= 9.0",
+          "is_conflict": true
+        },
+        "final_result": "CONFLICT"
+      },
+      "contract_obligation": {
+        "topic": "VULNERABILITY_REMEDIATION",
+        "requirement": "Remediate critical security vulnerabilities in routine quarterly releases",
+        "value": "Quarterly release cycles (~90 calendar days)",
+        "unit": "calendar_days",
+        "raw_statement": "Clause 9: Vulnerability Remediation and Patch Cycles\nVendor will address reported critical system vulnerabilities as part of its standard quarterly release cycle, unless\nemergency out-of-band updates ",
+        "clause_number": "Clause 9",
+        "page": 3
+      },
+      "policy_obligation": {
+        "policy_id": "POL-SEC-2024-v3.2",
+        "document_name": "POL-SEC-2024-v3.2_Information_Security_Policy.pdf",
+        "version": "3.2",
+        "section": "Section 4.1: Vulnerability Remediation SLAs",
+        "topic": "VULNERABILITY_REMEDIATION",
+        "requirement": "Critical vulnerability remediation SLA (CVSS >= 9.0)",
+        "value": 7,
+        "unit": "calendar_days",
+        "operator": "<=",
+        "severity": "MEDIUM",
+        "source_page": 2,
+        "source_quote": "Vendors must remediate critical vulnerabilities (CVSS score >= 9.0) within seven (7) calendar days of public disclosure. High severity vulnerabilities must be remediated within thirty (30) calendar days."
+      }
+    },
+    {
+      "clause_id": "clause-10",
+      "clause_number": "Clause 10",
+      "clause_text": "Clause 10: Governing Law and Dispute Arbitration\nThis Agreement shall be governed by and construed in accordance with the laws of the State of Delaware, without giving\neffect to conflicts of law principles. Any dispute shall be resolved through binding arbitration under the rules of the\nAmerican Arbitration Association in Wilmington, Delaware.",
+      "classification": "NOT_FOUND",
+      "confidence": "NOT_FOUND",
+      "risk_level": "LOW",
+      "explanation": "Internal corporate policy is silent regarding this clause. No specific policy guidelines or mandatory restrictions were located in the ingested policies.",
+      "evidence": [],
+      "suggested_redline": null,
+      "risk_score": 15.0,
+      "risk_rationale": "Internal corporate policy is silent; standard commercial risk profile applies.",
+      "outcome": "POLICY_SILENT",
+      "evidence_chain": {
+        "contract": {
+          "clause_number": "Clause 10",
+          "quotation": "Clause 10: Governing Law and Dispute Arbitration\nThis Agreement shall be governed by and construed in accordance with the laws of the State of Delaware, without...",
+          "page": 4
+        },
+        "retrieval": {
+          "document_name": "None (Policy Silent)",
+          "section": "N/A",
+          "page": 1,
+          "method": "Hybrid BM25 + TF-IDF RRF"
+        },
+        "verification": {
+          "match_status": "NOT_FOUND",
+          "page_confirmed": false,
+          "section_confirmed": false,
+          "document_version_confirmed": false
+        },
+        "extraction": {
+          "contract_obligation": "Governing Law and Dispute Arbitration",
+          "policy_obligation": "No applicable corporate policy obligation found"
+        },
+        "comparison": {
+          "contract_value": "Governing Law and Dispute Arbitration",
+          "policy_value": "Not Specified in Policies",
+          "operator": "N/A",
+          "comparison_result": "Policy is silent: no conflicting or governing standard exists in corporate policies.",
+          "is_conflict": false
+        },
+        "final_result": "POLICY_SILENT"
+      },
+      "contract_obligation": {
+        "topic": "GENERAL_PROVISION",
+        "requirement": "Governing Law and Dispute Arbitration",
+        "value": null,
+        "unit": null,
+        "raw_statement": "Clause 10: Governing Law and Dispute Arbitration\nThis Agreement shall be governed by and construed in accordance with the laws of the State of Delaware, without giving\neffect to co",
+        "clause_number": "Clause 10",
+        "page": 4
+      },
+      "policy_obligation": null
+    },
+    {
+      "clause_id": "clause-11",
+      "clause_number": "Clause 11",
+      "clause_text": "Clause 11: Marketing Publicity and Trademark Usage\nCustomer grants Vendor the limited right to display Customer's corporate name, logo, and trade marks in public customer\nlists, marketing materials, and corporate investor decks.",
+      "classification": "NOT_FOUND",
+      "confidence": "NOT_FOUND",
+      "risk_level": "LOW",
+      "explanation": "Internal corporate policy is silent regarding this clause. No specific policy guidelines or mandatory restrictions were located in the ingested policies.",
+      "evidence": [],
+      "suggested_redline": null,
+      "risk_score": 15.0,
+      "risk_rationale": "Internal corporate policy is silent; standard commercial risk profile applies.",
+      "outcome": "POLICY_SILENT",
+      "evidence_chain": {
+        "contract": {
+          "clause_number": "Clause 11",
+          "quotation": "Clause 11: Marketing Publicity and Trademark Usage\nCustomer grants Vendor the limited right to display Customer's corporate name, logo, and trade marks in publi...",
+          "page": 4
+        },
+        "retrieval": {
+          "document_name": "None (Policy Silent)",
+          "section": "N/A",
+          "page": 1,
+          "method": "Hybrid BM25 + TF-IDF RRF"
+        },
+        "verification": {
+          "match_status": "NOT_FOUND",
+          "page_confirmed": false,
+          "section_confirmed": false,
+          "document_version_confirmed": false
+        },
+        "extraction": {
+          "contract_obligation": "Marketing Publicity and Trademark Usage",
+          "policy_obligation": "No applicable corporate policy obligation found"
+        },
+        "comparison": {
+          "contract_value": "Marketing Publicity and Trademark Usage",
+          "policy_value": "Not Specified in Policies",
+          "operator": "N/A",
+          "comparison_result": "Policy is silent: no conflicting or governing standard exists in corporate policies.",
+          "is_conflict": false
+        },
+        "final_result": "POLICY_SILENT"
+      },
+      "contract_obligation": {
+        "topic": "GENERAL_PROVISION",
+        "requirement": "Marketing Publicity and Trademark Usage",
+        "value": null,
+        "unit": null,
+        "raw_statement": "Clause 11: Marketing Publicity and Trademark Usage\nCustomer grants Vendor the limited right to display Customer's corporate name, logo, and trade marks in public customer\nlists, ma",
+        "clause_number": "Clause 11",
+        "page": 4
+      },
+      "policy_obligation": null
+    },
+    {
+      "clause_id": "clause-12",
+      "clause_number": "Clause 12",
+      "clause_text": "Clause 12: Force Majeure and Excused Delays\nNeither party shall be liable for delay or failure in performance resulting from causes beyond its reasonable control,\nincluding acts of God, labor strikes, power failures, natural disasters, or government restrictions.",
+      "classification": "NOT_FOUND",
+      "confidence": "NOT_FOUND",
+      "risk_level": "LOW",
+      "explanation": "Internal corporate policy is silent regarding this clause. No specific policy guidelines or mandatory restrictions were located in the ingested policies.",
+      "evidence": [],
+      "suggested_redline": null,
+      "risk_score": 15.0,
+      "risk_rationale": "Internal corporate policy is silent; standard commercial risk profile applies.",
+      "outcome": "POLICY_SILENT",
+      "evidence_chain": {
+        "contract": {
+          "clause_number": "Clause 12",
+          "quotation": "Clause 12: Force Majeure and Excused Delays\nNeither party shall be liable for delay or failure in performance resulting from causes beyond its reasonable contro...",
+          "page": 4
+        },
+        "retrieval": {
+          "document_name": "None (Policy Silent)",
+          "section": "N/A",
+          "page": 1,
+          "method": "Hybrid BM25 + TF-IDF RRF"
+        },
+        "verification": {
+          "match_status": "NOT_FOUND",
+          "page_confirmed": false,
+          "section_confirmed": false,
+          "document_version_confirmed": false
+        },
+        "extraction": {
+          "contract_obligation": "Force Majeure and Excused Delays",
+          "policy_obligation": "No applicable corporate policy obligation found"
+        },
+        "comparison": {
+          "contract_value": "Force Majeure and Excused Delays",
+          "policy_value": "Not Specified in Policies",
+          "operator": "N/A",
+          "comparison_result": "Policy is silent: no conflicting or governing standard exists in corporate policies.",
+          "is_conflict": false
+        },
+        "final_result": "POLICY_SILENT"
+      },
+      "contract_obligation": {
+        "topic": "GENERAL_PROVISION",
+        "requirement": "Force Majeure and Excused Delays",
+        "value": null,
+        "unit": null,
+        "raw_statement": "Clause 12: Force Majeure and Excused Delays\nNeither party shall be liable for delay or failure in performance resulting from causes beyond its reasonable control,\nincluding acts of",
+        "clause_number": "Clause 12",
+        "page": 4
+      },
+      "policy_obligation": null
+    },
+    {
+      "clause_id": "clause-13",
+      "clause_number": "Clause 13",
+      "clause_text": "Clause 13: Customer Data Ownership and AI Training Restrictions\nCustomer retains exclusive title, ownership, and all intellectual property rights in and to Customer Data. Vendor processes\ndata solely as a Data Processor pursuant to documented instructions and shall not use Customer Data to train artificial\nintelligence models or for commercial exploitation.",
+      "classification": "NO_CONFLICT",
+      "confidence": "EXPLICITLY_STATED",
+      "risk_level": "LOW",
+      "explanation": "Contract explicitly affirms Customer's exclusive ownership of data and forbids training AI models on customer data, in full compliance with Data Protection & Privacy Policy Section 1.2.",
+      "evidence": [
+        {
+          "document_id": "pol-02",
+          "document": "POL-DPA-04_Data_Protection_and_Privacy.pdf",
+          "page": 1,
+          "section": "Section 2.3: Subprocessor Authorization Requirements",
+          "text": "Data Protection & Privacy Compliance Standards\n\nCorporate Governance Policy Manual  |  Document Ref: POL-DPA-04  |  Version 3.4\n\nSection 1.2: Customer Data Ownership & Processing\n\nThe Company retains exclusive title, ownership, and all intellectual property ri",
+          "highlight_start": 0,
+          "highlight_end": 260,
+          "citation": {
+            "verified": true,
+            "status": "VERIFIED",
+            "similarity_score": 1.0,
+            "note": "Exact match verified in code (offsets 0–260)."
+          },
+          "bboxes": [
+            [
+              51.0,
+              49.74,
+              471.12,
+              74.53
+            ],
+            [
+              51.0,
+              78.32,
+              387.3,
+              90.69
+            ],
+            [
+              51.0,
+              113.66,
+              352.42,
+              130.18
+            ],
+            [
+              51.0,
+              133.79,
+              375.7,
+              146.84
+            ]
+          ],
+          "page_width": 612.0,
+          "page_height": 792.0,
+          "document_version": "4.0"
+        }
+      ],
+      "suggested_redline": null,
+      "risk_score": 5.0,
+      "risk_rationale": "Fully compliant with corporate governance baselines and security requirements.",
+      "outcome": "COMPLIANT",
+      "evidence_chain": {
+        "contract": {
+          "clause_number": "Clause 13",
+          "quotation": "Clause 13: Customer Data Ownership and AI Training Restrictions\nCustomer retains exclusive title, ownership, and all intellectual property rights in and to Cust...",
+          "page": 5
+        },
+        "retrieval": {
+          "document_name": "POL-DPA-04_Data_Protection_and_Privacy.pdf",
+          "section": "Section 2.3: Subprocessor Authorization Requirements",
+          "page": 1,
+          "method": "Hybrid BM25 + TF-IDF RRF (k=60)"
+        },
+        "verification": {
+          "match_status": "VERIFIED",
+          "page_confirmed": true,
+          "section_confirmed": true,
+          "document_version_confirmed": true
+        },
+        "extraction": {
+          "contract_obligation": "Affirm customer title and forbid training AI models",
+          "policy_obligation": "Exclusive customer title and prohibition on AI training"
+        },
+        "comparison": {
+          "contract_value": "Exclusive customer title; no AI training",
+          "policy_value": "exclusive_title_no_ai_training",
+          "operator": "==",
+          "comparison_result": "Exclusive customer title & AI training prohibition == Policy mandate (Compliant)",
+          "is_conflict": false
+        },
+        "final_result": "COMPLIANT"
+      },
+      "contract_obligation": {
+        "topic": "DATA_OWNERSHIP_AI",
+        "requirement": "Affirm customer title and forbid training AI models",
+        "value": "Exclusive customer title; no AI training",
+        "unit": "boolean",
+        "raw_statement": "Clause 13: Customer Data Ownership and AI Training Restrictions\nCustomer retains exclusive title, ownership, and all intellectual property rights in and to Customer Data. Vendor processes\ndata solely ",
+        "clause_number": "Clause 13",
+        "page": 5
+      },
+      "policy_obligation": {
+        "policy_id": "POL-DPA-04",
+        "document_name": "POL-DPA-04_Data_Protection_and_Privacy.pdf",
+        "version": "4.0",
+        "section": "Section 1.2: Customer Data Ownership & Processing",
+        "topic": "DATA_OWNERSHIP_AI",
+        "requirement": "Exclusive customer title and prohibition on AI training",
+        "value": "exclusive_title_no_ai_training",
+        "unit": "boolean",
+        "operator": "==",
+        "severity": "LOW",
+        "source_page": 1,
+        "source_quote": "The Company retains exclusive title, ownership, and all intellectual property rights in and to Company Data. Vendors process data solely as Data Processors pursuant to documented written instructions and shall not use data for training AI models or commercial exploitation."
+      }
+    },
+    {
+      "clause_id": "clause-14",
+      "clause_number": "Clause 14",
+      "clause_text": "Clause 14: Multi-Factor Authentication Compliance\nVendor guarantees that multi-factor authentication (MFA) is strictly enforced across all administrative access points,\ncustomer portals, and developer APIs in full compliance with NIST 800-63B guidelines.",
+      "classification": "NO_CONFLICT",
+      "confidence": "EXPLICITLY_STATED",
+      "risk_level": "LOW",
+      "explanation": "Contract strictly enforces multi-factor authentication conforming to NIST 800-63B across administrative portals and APIs, in full compliance with Information Security Policy Section 1.1.",
+      "evidence": [
+        {
+          "document_id": "pol-03",
+          "document": "POL-SEC-2024-v3.2_Information_Security_Policy.pdf",
+          "page": 1,
+          "section": "Section 2.1: Mandatory Encryption Standards",
+          "text": "Enterprise Information Security Policy\n\nCorporate Governance Policy Manual  |  Document Ref: POL-SEC-2024-v3.2  |  Version 3.4\n\nSection 1.1: Scope and Multi-Factor Access Control\n\nThis policy governs all corporate systems, vendors, and third-party SaaS applica",
+          "highlight_start": 0,
+          "highlight_end": 260,
+          "citation": {
+            "verified": true,
+            "status": "VERIFIED",
+            "similarity_score": 1.0,
+            "note": "Exact match verified in code (offsets 0–260)."
+          },
+          "bboxes": [
+            [
+              51.0,
+              49.74,
+              378.1,
+              74.53
+            ],
+            [
+              51.0,
+              78.32,
+              417.33,
+              90.69
+            ],
+            [
+              51.0,
+              113.66,
+              345.73,
+              130.18
+            ],
+            [
+              51.0,
+              133.79,
+              388.91,
+              146.84
+            ]
+          ],
+          "page_width": 612.0,
+          "page_height": 792.0,
+          "document_version": "3.2"
+        }
+      ],
+      "suggested_redline": null,
+      "risk_score": 5.0,
+      "risk_rationale": "Fully compliant with corporate governance baselines and security requirements.",
+      "outcome": "COMPLIANT",
+      "evidence_chain": {
+        "contract": {
+          "clause_number": "Clause 14",
+          "quotation": "Clause 14: Multi-Factor Authentication Compliance\nVendor guarantees that multi-factor authentication (MFA) is strictly enforced across all administrative access...",
+          "page": 5
+        },
+        "retrieval": {
+          "document_name": "POL-SEC-2024-v3.2_Information_Security_Policy.pdf",
+          "section": "Section 2.1: Mandatory Encryption Standards",
+          "page": 1,
+          "method": "Hybrid BM25 + TF-IDF RRF (k=60)"
+        },
+        "verification": {
+          "match_status": "VERIFIED",
+          "page_confirmed": true,
+          "section_confirmed": true,
+          "document_version_confirmed": true
+        },
+        "extraction": {
+          "contract_obligation": "Enforce MFA across administrative portals and APIs",
+          "policy_obligation": "Mandatory MFA adhering to NIST 800-63B standards"
+        },
+        "comparison": {
+          "contract_value": "MFA enforcing NIST 800-63B",
+          "policy_value": "MFA_NIST_800_63B",
+          "operator": "==",
+          "comparison_result": "MFA NIST 800-63B == Mandatory policy standard (Compliant)",
+          "is_conflict": false
+        },
+        "final_result": "COMPLIANT"
+      },
+      "contract_obligation": {
+        "topic": "MFA_ACCESS_CONTROL",
+        "requirement": "Enforce MFA across administrative portals and APIs",
+        "value": "MFA enforcing NIST 800-63B",
+        "unit": "standard",
+        "raw_statement": "Clause 14: Multi-Factor Authentication Compliance\nVendor guarantees that multi-factor authentication (MFA) is strictly enforced across all administrative access points,\ncustomer portals, and developer",
+        "clause_number": "Clause 14",
+        "page": 5
+      },
+      "policy_obligation": {
+        "policy_id": "POL-SEC-2024-v3.2",
+        "document_name": "POL-SEC-2024-v3.2_Information_Security_Policy.pdf",
+        "version": "3.2",
+        "section": "Section 1.1: Scope and Multi-Factor Access Control",
+        "topic": "MFA_ACCESS_CONTROL",
+        "requirement": "Mandatory MFA adhering to NIST 800-63B standards",
+        "value": "MFA_NIST_800_63B",
+        "unit": "standard",
+        "operator": "==",
+        "severity": "LOW",
+        "source_page": 1,
+        "source_quote": "Multi-factor authentication (MFA) is strictly required across all administrative, API, and end-user access points. Passwords must adhere to NIST 800-63B standards."
+      }
+    },
+    {
+      "clause_id": "clause-15",
+      "clause_number": "Clause 15",
+      "clause_text": "Clause 15: Cross-Border Data Residency Commitments\nVendor explicitly covenants that all customer personal data, telemetry, and compute operations shall be stored and\nprocessed exclusively within data centers situated inside the European Economic Area (EEA).",
+      "classification": "NO_CONFLICT",
+      "confidence": "EXPLICITLY_STATED",
+      "risk_level": "LOW",
+      "explanation": "Contract covenants that all customer personal data, telemetry, and compute environments shall reside exclusively inside the European Economic Area (EEA), in full compliance with Cross-Border Data Transfer Policy Section 1.1.",
+      "evidence": [
+        {
+          "document_id": "pol-01",
+          "document": "POL-CBD-02_Cross_Border_Data_Transfer_Policy.pdf",
+          "page": 1,
+          "section": "Section 1.1: Data Residency Requirements",
+          "text": "Cross-Border Data Transfer & Jurisdiction Policy\n\nCorporate Governance Policy Manual  |  Document Ref: POL-CBD-02  |  Version 3.4\n\nSection 1.1: Data Residency Requirements\n\nAll customer personal data, telemetry, and business records must be stored and processe",
+          "highlight_start": 0,
+          "highlight_end": 260,
+          "citation": {
+            "verified": true,
+            "status": "VERIFIED",
+            "similarity_score": 1.0,
+            "note": "Exact match verified in code (offsets 0–260)."
+          },
+          "bboxes": [
+            [
+              51.0,
+              49.74,
+              471.1,
+              74.53
+            ],
+            [
+              51.0,
+              78.32,
+              387.8,
+              90.69
+            ],
+            [
+              51.0,
+              113.66,
+              294.41,
+              130.18
+            ],
+            [
+              51.0,
+              133.79,
+              428.52,
+              146.84
+            ]
+          ],
+          "page_width": 612.0,
+          "page_height": 792.0,
+          "document_version": "2.0"
+        }
+      ],
+      "suggested_redline": null,
+      "risk_score": 5.0,
+      "risk_rationale": "Fully compliant with corporate governance baselines and security requirements.",
+      "outcome": "COMPLIANT",
+      "evidence_chain": {
+        "contract": {
+          "clause_number": "Clause 15",
+          "quotation": "Clause 15: Cross-Border Data Residency Commitments\nVendor explicitly covenants that all customer personal data, telemetry, and compute operations shall be store...",
+          "page": 5
+        },
+        "retrieval": {
+          "document_name": "POL-CBD-02_Cross_Border_Data_Transfer_Policy.pdf",
+          "section": "Section 1.1: Data Residency Requirements",
+          "page": 1,
+          "method": "Hybrid BM25 + TF-IDF RRF (k=60)"
+        },
+        "verification": {
+          "match_status": "VERIFIED",
+          "page_confirmed": true,
+          "section_confirmed": true,
+          "document_version_confirmed": true
+        },
+        "extraction": {
+          "contract_obligation": "Store and process data exclusively in EEA data centers",
+          "policy_obligation": "Data storage and processing restricted to EEA or adequate territories"
+        },
+        "comparison": {
+          "contract_value": "Exclusive EEA data residency",
+          "policy_value": "EEA_only",
+          "operator": "==",
+          "comparison_result": "EEA storage == Policy data residency requirement (Compliant)",
+          "is_conflict": false
+        },
+        "final_result": "COMPLIANT"
+      },
+      "contract_obligation": {
+        "topic": "DATA_RESIDENCY",
+        "requirement": "Store and process data exclusively in EEA data centers",
+        "value": "Exclusive EEA data residency",
+        "unit": "geographic_region",
+        "raw_statement": "Clause 15: Cross-Border Data Residency Commitments\nVendor explicitly covenants that all customer personal data, telemetry, and compute operations shall be stored and\nprocessed exclusively within data ",
+        "clause_number": "Clause 15",
+        "page": 5
+      },
+      "policy_obligation": {
+        "policy_id": "POL-CBD-02",
+        "document_name": "POL-CBD-02_Cross_Border_Data_Transfer_Policy.pdf",
+        "version": "2.0",
+        "section": "Section 1.1: Data Residency Requirements",
+        "topic": "DATA_RESIDENCY",
+        "requirement": "Data storage and processing restricted to EEA or adequate territories",
+        "value": "EEA_only",
+        "unit": "geographic_region",
+        "operator": "==",
+        "severity": "LOW",
+        "source_page": 1,
+        "source_quote": "All customer personal data, telemetry, and business records must be stored and processed within data centers located inside the European Economic Area (EEA) or countries recognized as possessing adequate protection by the European Commission."
+      }
+    }
+  ]
+}

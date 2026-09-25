@@ -10,11 +10,19 @@ from app.services.pdf_parser import DocumentPage
 
 
 class ExtractedClause:
-    def __init__(self, clause_id: str, clause_number: str, clause_title: str, clause_text: str):
+    def __init__(
+        self,
+        clause_id: str,
+        clause_number: str,
+        clause_title: str,
+        clause_text: str,
+        page_number: int = 1
+    ):
         self.clause_id = clause_id
         self.clause_number = clause_number
         self.clause_title = clause_title
         self.clause_text = clause_text
+        self.page_number = page_number
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -22,6 +30,7 @@ class ExtractedClause:
             "clause_number": self.clause_number,
             "clause_title": self.clause_title,
             "clause_text": self.clause_text,
+            "page_number": self.page_number,
         }
 
 
@@ -50,11 +59,17 @@ def extract_contract_clauses(pages: List[DocumentPage]) -> List[ExtractedClause]
         # Fallback segmentation: Split by double newline
         blocks = [b.strip() for b in full_text.split("\n\n") if len(b.strip()) > 40]
         for idx, block in enumerate(blocks, start=1):
+            pg_num = 1
+            for p in pages:
+                if block[:50] in p.text:
+                    pg_num = p.page_number
+                    break
             clauses.append(ExtractedClause(
                 clause_id=f"clause-{idx:02d}",
                 clause_number=f"Clause {idx}",
                 clause_title=f"Section {idx}",
-                clause_text=block
+                clause_text=block,
+                page_number=pg_num
             ))
         return clauses
 
@@ -87,6 +102,13 @@ def extract_contract_clauses(pages: List[DocumentPage]) -> List[ExtractedClause]
             c_num = f"Clause {i+1}"
             c_title = header_line[:50]
 
+        # Determine page number
+        clause_page = 1
+        for p in pages:
+            if header_line in p.text or (c_title and c_title in p.text) or (lines and lines[0] in p.text):
+                clause_page = p.page_number
+                break
+
         # Extract only the actual clause body (excluding duplicate header)
         clause_full_text = f"{c_num}: {c_title}\n{body_text}" if body_text != header_line else header_line
 
@@ -94,7 +116,8 @@ def extract_contract_clauses(pages: List[DocumentPage]) -> List[ExtractedClause]
             clause_id=f"clause-{i+1:02d}",
             clause_number=c_num,
             clause_title=c_title or f"Clause {i+1}",
-            clause_text=clause_full_text
+            clause_text=clause_full_text,
+            page_number=clause_page
         ))
 
     return clauses
